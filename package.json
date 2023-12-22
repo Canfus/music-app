@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host --port 3000",
+    "dev:client": "vite --host --port 3000",
+    "dev:server": "cd ./server && npm run dev",
+    "dev": "concurrently npm:dev:*",
     "build": "tsc && vite build",
     "tsc": "npx tsc",
     "lint:eslint": "eslint src --ext ts,tsx",
@@ -16,9 +18,14 @@
   "dependencies": {
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@reduxjs/toolkit": "^2.0.1",
+    "@tanstack/react-query": "^5.14.2",
+    "axios": "^1.6.2",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
+    "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -26,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.55.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

@@ -1,0 +1,17 @@
+.layout__wrapper {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.layout__outlet {
+    width: 100%;
+}
+
+.media__player {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+}

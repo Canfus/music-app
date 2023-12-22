@@ -1,14 +1,11 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Provider } from '@radix-ui/react-tooltip';
 
-import { MediaPlayer } from '@app/common';
+import { Router } from '@app/router';
 
 import './App.css';
 
-const App = () => (
+export const App = () => (
   <Provider>
-    <MediaPlayer style={{ position: 'absolute', bottom: '0' }} />
+    <Router />
   </Provider>
 );
-
-export default App;
