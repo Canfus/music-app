@@ -1,0 +1,40 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+
+  color: aliceblue;
+
+  transition: transform 150ms;
+}
+
+.button:not(:disabled):active {
+  transform: scale(0.9);
+}
+
+.button:not(:disabled):hover {
+  cursor: pointer;
+}
+
+.button:disabled {
+  color: #5d5d5d;
+}
+
+.button--medium {
+  padding: 8px;
+}
+
+.button--large {
+  padding: 12px;
+}
+
+.button--outlined {
+  outline: 1px solid currentColor;
+}
+
+.button--plain {
+  outline: none;
+}

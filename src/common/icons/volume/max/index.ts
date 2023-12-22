@@ -1,0 +1,1 @@
+export { VolumeMaxIcon } from './volumeMax';

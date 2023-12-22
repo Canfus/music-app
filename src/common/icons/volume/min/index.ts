@@ -1,0 +1,1 @@
+export { VolumeMinIcon } from './volumeMin';

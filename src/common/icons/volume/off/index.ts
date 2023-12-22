@@ -1,0 +1,1 @@
+export { VolumeOffIcon } from './volumeOff';
