@@ -11,15 +11,15 @@
 }
 
 :root {
-  --primary-color: #FF5733;
-  --white-color: #F5F5F5;
+  --primary-color: #ff5733;
+  --white-color: #f5f5f5;
   --black-color: #252525;
-  --text-color: #C8C8C8;
+  --text-color: #c8c8c8;
   --bg-primary-color: #151515;
 
   --slider-height: 10px;
   --slider-bg-color: #363636;
-  --slider-thumb-color: #FF5733;
+  --slider-thumb-color: #ff5733;
 
-  --track-font-color: #F5F5F5;
+  --track-font-color: #f5f5f5;
 }
