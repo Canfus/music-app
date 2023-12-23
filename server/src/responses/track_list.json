@@ -1,10 +1,13 @@
 [
   {
+    "id": 0,
     "name": "Супернова",
     "author": "plagueinside",
-    "favorite": "false"
+    "favorite": "false",
+    "photo": null
   },
   {
+    "id":  1,
     "name": "Another Life",
     "author": "Motionless in White",
     "favorite": "true"

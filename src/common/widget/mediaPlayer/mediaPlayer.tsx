@@ -9,6 +9,7 @@ import {
   PlayIcon,
   PauseIcon,
 } from '@app/common';
+import { useAppSelector } from '@app/common/store';
 
 import { Volume } from '@app/common/widget/mediaPlayer/volume';
 import { TrackPreview } from './trackPreview';
@@ -16,9 +17,10 @@ import type { MediaPlayerProps } from './mediaPlayer.interface';
 import styles from './mediaPlayer.module.css';
 
 export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
+  const { trackList } = useAppSelector((store) => store.albumSlice);
+
   const [trackState, setTrackState] = useState<boolean>(false);
   const [playerState, setPlayerState] = useState<number[]>([0]);
-  const [favorite, setFavorite] = useState<boolean>(false);
   const [volume, setVolume] = useState<number[]>([0]);
 
   return (
@@ -42,10 +44,7 @@ export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
               icon={<NextIcon />}
             />
           </div>
-          <TrackPreview
-            track={{ name: 'Супернова', author: 'plagueinside', favorite }}
-            onLike={() => setFavorite((prev) => !prev)}
-          />
+          <TrackPreview track={trackList[0]} />
         </div>
         <Volume volume={volume} onVolumeChange={setVolume} />
       </div>
