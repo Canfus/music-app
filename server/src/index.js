@@ -40,6 +40,20 @@ server.post('/register', (req, res) => {
   });
 });
 
+server.post('/login', (req, res) => {
+  const { username } = req.body;
+
+  const user = usersRouter.db.get('users').find({ username }).value();
+
+  if (!user) {
+    return res.status(404).json({
+      error: "User doesn't exist",
+    });
+  }
+
+  return res.json(user);
+});
+
 server.use(playlistsRouter);
 server.use(usersRouter);
 
