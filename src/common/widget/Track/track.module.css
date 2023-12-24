@@ -1,0 +1,54 @@
+.track__wrapper {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    padding: 8px;
+}
+
+.track__wrapper:hover {
+    border: 1px dashed var(--track-border-color);
+}
+
+.track {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    column-gap: 12px;
+}
+
+.track__image {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 4px;
+
+    object-fit: cover;
+}
+
+.track__info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    color: var(--track-font-color);
+}
+
+.info__trackname {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.info__author {
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -17,7 +17,7 @@ import type { MediaPlayerProps } from './mediaPlayer.interface';
 import styles from './mediaPlayer.module.css';
 
 export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
-  const { trackList } = useAppSelector((store) => store.albumSlice);
+  const { track } = useAppSelector((store) => store.musicPlayerSlice);
 
   const [trackState, setTrackState] = useState<boolean>(false);
   const [playerState, setPlayerState] = useState<number[]>([0]);
@@ -44,7 +44,7 @@ export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
               icon={<NextIcon />}
             />
           </div>
-          <TrackPreview track={trackList[0]} />
+          <TrackPreview track={track!} />
         </div>
         <Volume volume={volume} onVolumeChange={setVolume} />
       </div>

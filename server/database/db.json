@@ -1,0 +1,60 @@
+{
+  "playlists": [
+    {
+      "id": 0,
+      "title": "Популярное",
+      "photo": "https://images.unsplash.com/photo-1621109246687-10ae613f2d8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+      "music_list": [
+        {
+          "id": 0,
+          "photo": "https://avatars.yandex.net/get-music-content/4388221/213fb4d5.a.3741447-3/50x50",
+          "author": "Reamon",
+          "name": "Sometimes",
+          "link": ""
+        },
+        {
+          "id": 1,
+          "photo": "https://avatars.yandex.net/get-music-content/5280749/5935d866.a.17200281-1/50x50",
+          "author": "Thousand Foot Krutch",
+          "name": "Take It Out On Me",
+          "link": ""
+        },
+        {
+          "id": 2,
+          "photo": "https://avatars.yandex.net/get-music-content/2811629/77c3c413.a.11376956-1/50x50",
+          "author": "Hoobastank",
+          "name": "The Reason",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Русское",
+      "photo": "https://images.unsplash.com/photo-1621109246687-10ae613f2d8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+      "music_list": [
+        {
+          "id": 0,
+          "photo": "https://avatars.yandex.net/get-music-content/4388221/213fb4d5.a.3741447-3/50x50",
+          "author": "Reamon",
+          "name": "Sometimes",
+          "link": ""
+        },
+        {
+          "id": 1,
+          "photo": "https://avatars.yandex.net/get-music-content/5280749/5935d866.a.17200281-1/50x50",
+          "author": "Thousand Foot Krutch",
+          "name": "Take It Out On Me",
+          "link": ""
+        },
+        {
+          "id": 2,
+          "photo": "https://avatars.yandex.net/get-music-content/2811629/77c3c413.a.11376956-1/50x50",
+          "author": "Hoobastank",
+          "name": "The Reason",
+          "link": ""
+        }
+      ]
+    }
+  ]
+}

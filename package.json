@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:client": "vite --host --port 3000",
-    "dev:server": "cd ./server && npm run dev",
+    "dev:server": "cd ./server && npm run start",
     "dev": "concurrently npm:dev:*",
     "build": "tsc && vite build",
     "tsc": "npx tsc",
