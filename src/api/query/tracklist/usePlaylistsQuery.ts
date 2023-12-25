@@ -4,15 +4,15 @@ import {
 } from '@tanstack/react-query';
 
 import { axiosInstance } from '@app/api';
-import type { Track, AxiosError } from '@app/api';
+import type { Playlist, AxiosError } from '@app/api';
 
-export const useTracklist = (
-  queryOptions?: UseSuspenseQueryOptions<Track[], AxiosError>,
+export const usePlaylistsQuery = (
+  queryOptions?: UseSuspenseQueryOptions<Playlist[], AxiosError>,
 ) => {
-  const queryInfo = useSuspenseQuery<Track[], AxiosError>({
+  const queryInfo = useSuspenseQuery<Playlist[], AxiosError>({
     queryKey: ['tracklist'],
     queryFn: async () => {
-      const { data } = await axiosInstance.get<Track[]>('/track_list');
+      const { data } = await axiosInstance.get<Playlist[]>('/playlists');
       return data;
     },
     staleTime: 5 * 60 * 1000,

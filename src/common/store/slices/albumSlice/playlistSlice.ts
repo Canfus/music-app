@@ -1,23 +1,22 @@
 /* eslint-disable no-param-reassign */
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Track } from '@app/api';
+import { Playlist } from '@app/api';
 
 import type { AlbumSlice } from './albumSlice.interface';
 
 const initialState: AlbumSlice = {
-  trackList: [],
+  playlist: [],
 };
 
-export const albumSlice = createSlice({
+export const playlistSlice = createSlice({
   name: 'albumSlice',
   initialState,
   reducers: {
-    setAlbum: (state, action: PayloadAction<Track[]>) => {
-      state.trackList = action.payload;
+    setPlaylists: (state, action: PayloadAction<Playlist[]>) => {
+      state.playlist = action.payload;
     },
   },
 });
 
-export const { setAlbum } = albumSlice.actions;
+export const { setPlaylists } = playlistSlice.actions;

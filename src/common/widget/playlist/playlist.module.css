@@ -1,0 +1,36 @@
+.playlist__wrapper {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 24px;
+
+    border: 1px solid var(--playlist-border-color);
+    border-radius: 10px;
+}
+
+.playlist__title {
+    font-size: 24px;
+    font-weight: 600;
+
+    color: var(--white-color);
+
+    margin-bottom: 24px;
+}
+
+.playlist__list {
+    width: 100%;
+}
+
+.track {
+    position: relative;
+
+    cursor: pointer;
+}
+
+.track:not(:last-child) {
+    margin-bottom: 12px;
+}
