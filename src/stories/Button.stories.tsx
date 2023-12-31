@@ -4,7 +4,7 @@ import { IconButton, LikeIcon } from '@app/common';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/Button',
+  title: 'UI/Button',
   component: IconButton,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
