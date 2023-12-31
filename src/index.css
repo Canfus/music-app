@@ -53,4 +53,16 @@ body {
   --button-plain-disabled-color: #626262;
 
   --button-transition-delay: 100ms;
+
+  --input-border-color: #434343;
+  --input-hover-border-color: #fff;
+  --input-active-border-color: #ff5733;
+  --input-label-font-color: #434343;
+  --input-fulfilled-label-font-color: #fff;
+  --input-font-color: #fff;
+  --input-readonly-border-color: #676767;
+  --input-readonly-font-color: #676767;
+  --input-invalid-color: #ff0000;
+
+  --input-transition-delay: 250ms;
 }
