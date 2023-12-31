@@ -12,14 +12,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     <button
       {...props}
       ref={ref}
-      className={classNames(styles.button, {
-        [styles['button--primary']]: variant === 'primary',
-        [styles['button--secondary']]: variant === 'secondary',
-        [styles['button--plain']]: variant === 'plain',
-        [styles['button--outlined']]: variant === 'outlined',
-        [styles['button--large']]: size === 'large',
-        [styles['button--medium']]: size === 'medium',
-      })}
+      className={classNames(
+        styles.button,
+        {
+          [styles['button--primary']]: variant === 'primary',
+          [styles['button--secondary']]: variant === 'secondary',
+          [styles['button--plain']]: variant === 'plain',
+          [styles['button--outlined']]: variant === 'outlined',
+          [styles['button--large']]: size === 'large',
+          [styles['button--medium']]: size === 'medium',
+        },
+        className,
+      )}
     >
       {children}
     </button>
