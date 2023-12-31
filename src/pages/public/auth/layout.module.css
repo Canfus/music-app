@@ -1,0 +1,28 @@
+.layout {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('../../../assets/auth-bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.layout__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 52px;
+}

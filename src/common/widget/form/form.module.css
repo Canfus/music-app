@@ -1,0 +1,11 @@
+.form__message {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 11px;
+  color: var(--input-invalid-color);
+  margin-top: 8px;
+}

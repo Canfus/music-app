@@ -7,3 +7,4 @@ export { DislikeIcon } from './dislike';
 export { LikeIcon } from './like';
 export { NoPhotoIcon } from './noPhoto';
 export * from './volume';
+export * from './logo';
