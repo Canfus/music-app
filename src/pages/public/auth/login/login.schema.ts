@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const schema = z.object({
-  login: z.string().min(1, { message: 'Введите логин' }).default(''),
+  username: z.string().min(1, { message: 'Введите логин' }).default(''),
   password: z
     .string()
     .superRefine((value, context) => {

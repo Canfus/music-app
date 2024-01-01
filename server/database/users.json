@@ -3,6 +3,7 @@
     {
       "id": 0,
       "username": "canfus",
+      "password": "Qwerty123",
       "playlist": [
         {
           "id": 1,
@@ -15,6 +16,7 @@
     {
       "id": 1703456121739,
       "username": "canfusss",
+      "password": "Qwerty123",
       "playlist": []
     }
   ]

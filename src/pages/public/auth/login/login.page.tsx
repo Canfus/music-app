@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Input,
@@ -9,22 +10,50 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  useAuth,
 } from '@app/common';
+import { useLoginMutation } from '@app/api';
 
 import { schema, Schema } from './login.schema';
 import styles from './login.module.css';
 
 export const Login = () => {
+  const { updateUser } = useAuth();
+  const navigate = useNavigate();
+
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      login: '',
+      username: '',
       password: '',
     },
   });
 
+  const { mutate } = useLoginMutation({
+    onSuccess: (data) => {
+      updateUser(data);
+      navigate('/');
+    },
+    onError: (error) => {
+      switch (error.response?.status) {
+        case 404:
+          form.setError('username', {
+            message: "Username doesn't exist",
+          });
+          break;
+        case 400:
+          form.setError('password', {
+            message: 'Invalid login or password',
+          });
+          break;
+        default:
+          console.log('Something went wrong');
+      }
+    },
+  });
+
   const onFormSubmit = (values: Schema) => {
-    console.log(values);
+    mutate(values);
   };
 
   return (
@@ -37,7 +66,7 @@ export const Login = () => {
         >
           <FormField
             control={form.control}
-            name="login"
+            name="username"
             render={({ field, fieldState }) => (
               <FormItem className={styles.form__item}>
                 <FormControl>

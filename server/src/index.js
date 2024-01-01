@@ -41,13 +41,19 @@ server.post('/register', (req, res) => {
 });
 
 server.post('/login', (req, res) => {
-  const { username } = req.body;
+  const { username, password } = req.body;
 
   const user = usersRouter.db.get('users').find({ username }).value();
 
   if (!user) {
     return res.status(404).json({
       error: "User doesn't exist",
+    });
+  }
+
+  if (user.password !== password) {
+    return res.status(400).json({
+      error: 'Invalid login or password',
     });
   }
 
