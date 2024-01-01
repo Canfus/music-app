@@ -6,5 +6,6 @@ export { PlusIcon } from './plus';
 export { DislikeIcon } from './dislike';
 export { LikeIcon } from './like';
 export { NoPhotoIcon } from './noPhoto';
+export { ProfileIcon } from './profile';
 export * from './volume';
 export * from './logo';

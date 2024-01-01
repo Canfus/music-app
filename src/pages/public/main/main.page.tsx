@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 
-import { Playlist } from '@app/common';
+import { Playlist, Header } from '@app/common';
 import { useAppDispatch, setPlaylists, setTrack } from '@app/common/store';
 import { usePlaylistsQuery } from '@app/api';
 
@@ -17,10 +17,13 @@ export const MainPage = () => {
   }, [dispatch, playlists]);
 
   return (
-    <div className={styles.playlists}>
-      {playlists.map((playlist) => (
-        <Playlist key={playlist.id} playlist={playlist} />
-      ))}
+    <div className={styles.page}>
+      <Header />
+      <div className={styles.page__playlists}>
+        {playlists.map((playlist) => (
+          <Playlist key={playlist.id} playlist={playlist} />
+        ))}
+      </div>
     </div>
   );
 };
