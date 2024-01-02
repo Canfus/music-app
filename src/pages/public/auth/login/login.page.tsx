@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import {
   Input,
@@ -97,6 +97,9 @@ export const Login = () => {
               </FormItem>
             )}
           />
+          <Link to="/auth/register" className={styles.form__link}>
+            Don&apos;t have an account? Sign up
+          </Link>
           <Button type="submit" className={styles.form__button}>
             Sign in
           </Button>

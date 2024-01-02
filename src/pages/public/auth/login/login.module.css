@@ -34,7 +34,7 @@
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 
@@ -48,8 +48,28 @@
   margin-bottom: 18px;
 }
 
+.form__link {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 115%;
+
+  color: var(--link-font-color);
+
+  text-decoration: none;
+
+  margin-top: 16px;
+
+  transition: 150ms;
+}
+
+.form__link:hover {
+  text-decoration: underline;
+
+  color: var(--white-color);
+}
+
 .form__button {
-  margin-top: 24px;
+  margin: 24px auto 0 auto;
 }
 
 @media screen and (min-width: 768px) {
