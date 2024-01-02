@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, Link } from 'react-router-dom';
@@ -12,12 +13,12 @@ import {
   FormMessage,
   useAuth,
 } from '@app/common';
-import { useLoginMutation } from '@app/api';
+import { useRegisterMutation } from '@app/api';
 
-import { schema, Schema } from './login.schema';
-import styles from './login.module.css';
+import { schema, Schema } from './register.schema';
+import styles from './register.module.css';
 
-export const Login = () => {
+export const Register = () => {
   const { updateUser } = useAuth();
   const navigate = useNavigate();
 
@@ -25,25 +26,24 @@ export const Login = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       username: '',
+      email: '',
       password: '',
+      repeat_password: '',
     },
   });
 
-  const { mutate } = useLoginMutation({
+  const { mutate } = useRegisterMutation({
     onSuccess: (data) => {
       updateUser(data);
       navigate('/');
     },
     onError: (error) => {
       switch (error.response?.status) {
-        case 404:
-          form.setError('username', {
-            message: "Username doesn't exist",
-          });
-          break;
         case 400:
-          form.setError('password', {
-            message: 'Invalid login or password',
+          const errorData = error.response?.data as Partial<Schema>;
+          const keys = Object.keys(errorData) as (keyof Schema)[];
+          keys.forEach((key) => {
+            form.setError(key, { message: errorData[key] });
           });
           break;
         default:
@@ -59,13 +59,13 @@ export const Login = () => {
   return (
     <div className={styles.page}>
       <Form {...form}>
-        <h1 className={styles.page__header}>Sign In</h1>
+        <h1 className={styles.page__header}>Sign Up</h1>
         <form
           className={styles.page__form}
           onSubmit={form.handleSubmit(onFormSubmit)}
         >
-          <Link to="/auth/register" className={styles.form__link}>
-            Don&apos;t have an account? Sign up
+          <Link to="/auth/login" className={styles.form__link}>
+            Already have an account? Sign in
           </Link>
           <FormField
             control={form.control}
@@ -85,14 +85,14 @@ export const Login = () => {
           />
           <FormField
             control={form.control}
-            name="password"
+            name="email"
             render={({ field, fieldState }) => (
               <FormItem className={styles.form__item}>
                 <FormControl>
                   <Input
-                    placeholder="Enter your password"
-                    type="password"
+                    placeholder="Enter your email"
                     invalid={fieldState.invalid}
+                    type="email"
                     {...field}
                   />
                 </FormControl>
@@ -100,11 +100,42 @@ export const Login = () => {
               </FormItem>
             )}
           />
-          <Link to="/auth/register" className={styles.form__link}>
-            Forgot password? Reset
-          </Link>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <FormItem className={styles.form__item}>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your password"
+                    invalid={fieldState.invalid}
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="repeat_password"
+            render={({ field, fieldState }) => (
+              <FormItem className={styles.form__item}>
+                <FormControl>
+                  <Input
+                    placeholder="Repeat your password"
+                    invalid={fieldState.invalid}
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button type="submit" className={styles.form__button}>
-            Sign in
+            Sign up
           </Button>
         </form>
       </Form>
