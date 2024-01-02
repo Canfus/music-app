@@ -13,7 +13,7 @@ server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
 server.post('/register', (req, res) => {
-  const { username, email, password, repeat_password } = req.body.userData;
+  const { username, email, password, repeat_password } = req.body;
 
   if (!username) {
     return res.status(400).json({

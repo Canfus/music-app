@@ -9,9 +9,7 @@ export const useRegisterMutation = (
 ) => {
   const mutationInfo = useMutation<User, AxiosError, RegisterCredentials>({
     mutationFn: async (userData) => {
-      const { data } = await axiosInstance.post<User>('/register', {
-        userData,
-      });
+      const { data } = await axiosInstance.post<User>('/register', userData);
       return data;
     },
     ...options,
