@@ -43,6 +43,36 @@ export const getPasswordValidationSchema = () =>
     })
     .default('');
 
+export const getPhoneValidationSchema = () =>
+  z
+    .string()
+    .superRefine((value, context) => {
+      if (!value.length) {
+        context.addIssue({
+          code: z.ZodIssueCode.too_small,
+          minimum: 1,
+          type: 'string',
+          inclusive: false,
+          message: 'Введите номер телефона',
+        });
+      }
+
+      if (!/\d/g.test(value)) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Некорректный номер телефона',
+        });
+      }
+
+      if (value[0] !== '+') {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Номер телефона должен начинаться с +',
+        });
+      }
+    })
+    .default('');
+
 export const getStringValidationSchema = (message: string) =>
   z.string().min(1, { message }).default('');
 
