@@ -3,6 +3,7 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 import { Track } from '@app/common';
+import { useAppDispatch, setTrack } from '@app/common/store';
 
 import type { PlaylistProps } from './playlist.interface';
 import styles from './playlist.module.css';
@@ -11,8 +12,10 @@ export const Playlist: FC<PlaylistProps> = ({
   playlist,
   className,
   ...props
-}) =>
-  playlist ? (
+}) => {
+  const dispatch = useAppDispatch();
+
+  return playlist ? (
     <div {...props} className={classNames(styles.playlist__wrapper, className)}>
       <div className={styles.playlist}>
         <img
@@ -37,7 +40,7 @@ export const Playlist: FC<PlaylistProps> = ({
         {playlist.music_list.map((track) => (
           <Track
             key={track.id}
-            onClick={() => console.log(track.id)}
+            onClick={() => dispatch(setTrack(track))}
             className={styles.track}
             track={track}
           />
@@ -45,19 +48,6 @@ export const Playlist: FC<PlaylistProps> = ({
       </div>
     </div>
   ) : (
-    // <div className={classNames(styles.playlist__wrapper, className)} {...props}>
-    // <h2 className={styles.playlist__title}>{playlist.title}</h2>
-    // <div className={styles.playlist__list}>
-    // {playlist.music_list.map((track) => (
-    //       <Track
-    //         key={track.id}
-    //         onClick={() => console.log(track.id)}
-    //         className={styles.track}
-    //         track={track}
-    //       />
-    //     ))}
-    //   </div>
-    // </div>
     <div
       {...props}
       className={classNames(styles['playlist__wrapper--empty'], className)}
@@ -65,3 +55,4 @@ export const Playlist: FC<PlaylistProps> = ({
       Select your best playlist
     </div>
   );
+};

@@ -11,20 +11,6 @@
           "author": "Reamon",
           "name": "Sometimes",
           "link": ""
-        },
-        {
-          "id": 1,
-          "photo": "https://avatars.yandex.net/get-music-content/5280749/5935d866.a.17200281-1/50x50",
-          "author": "Thousand Foot Krutch",
-          "name": "Take It Out On Me",
-          "link": ""
-        },
-        {
-          "id": 2,
-          "photo": "https://avatars.yandex.net/get-music-content/2811629/77c3c413.a.11376956-1/50x50",
-          "author": "Hoobastank",
-          "name": "The Reason",
-          "link": ""
         }
       ]
     },
@@ -45,13 +31,6 @@
           "photo": "https://avatars.yandex.net/get-music-content/5280749/5935d866.a.17200281-1/50x50",
           "author": "Thousand Foot Krutch",
           "name": "Take It Out On Me",
-          "link": ""
-        },
-        {
-          "id": 2,
-          "photo": "https://avatars.yandex.net/get-music-content/2811629/77c3c413.a.11376956-1/50x50",
-          "author": "Hoobastank",
-          "name": "The Reason",
           "link": ""
         }
       ]

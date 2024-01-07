@@ -9,10 +9,8 @@
     border-radius: 4px;
 
     padding: 8px;
-}
 
-.track__wrapper:hover {
-    border: 1px dashed var(--track-border-color);
+    transition: border-color 150ms;
 }
 
 .track--selected {

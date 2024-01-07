@@ -20,7 +20,7 @@ export const MainPage = () => {
 
   useLayoutEffect(() => {
     dispatch(setPlaylists(playlists));
-    dispatch(setTrack(playlists[0].music_list[2]));
+    dispatch(setTrack(playlists[0].music_list[0]));
   }, [dispatch, playlists]);
 
   return (
