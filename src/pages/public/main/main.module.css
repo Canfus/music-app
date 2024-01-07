@@ -8,13 +8,37 @@
   flex-direction: column;
 }
 
+.page__playlists__wrapper {
+  width: 100%;
+  height: calc(100vh - 190px);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  column-gap: 40px;
+
+  padding: 24px;
+}
+
 .page__playlists {
   width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
   gap: 24px;
 
-  padding: 24px;
+  overflow-y: auto;
+}
+
+.playlist__selected {
+  width: 100%;
+
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .playlist__selected {
+    display: flex;
+  }
 }

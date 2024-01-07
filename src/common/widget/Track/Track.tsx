@@ -1,13 +1,18 @@
 import classNames from 'classnames';
 import { FC, useState, MouseEventHandler } from 'react';
 
-import { IconButton, LikeIcon } from '@app/common';
+import { IconButton, LikeIcon, PlayIcon } from '@app/common';
+import { useAppSelector } from '@app/common/store';
 
 import { TrackProps } from './track.interface';
 import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
-  const [favorite, setFavorite] = useState(track.favorite);
+  const [favorite, setFavorite] = useState(false);
+
+  const { track: currentTrack } = useAppSelector(
+    (store) => store.musicPlayerSlice,
+  );
 
   const onLike: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
@@ -15,13 +20,25 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
   };
 
   return (
-    <div className={classNames(styles.track__wrapper, className)} {...props}>
+    <div
+      className={classNames(
+        styles.track__wrapper,
+        {
+          [styles['track--selected']]: currentTrack?.id === track.id,
+        },
+        className,
+      )}
+      {...props}
+    >
       <div className={styles.track}>
-        <img
-          className={styles.track__image}
-          src={track.photo}
-          alt={`${track.author} - ${track.name}`}
-        />
+        <div className={styles.image__wrapper}>
+          <IconButton icon={<PlayIcon />} className={styles.track__play} />
+          <img
+            className={styles.track__image}
+            src={track.photo}
+            alt={`${track.author} - ${track.name}`}
+          />
+        </div>
         <div className={styles.track__info}>
           <span className={styles.info__trackname}>{track?.name}</span>
           <span className={styles.info__author}>{track?.author}</span>

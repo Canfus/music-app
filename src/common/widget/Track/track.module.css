@@ -15,6 +15,10 @@
     border: 1px dashed var(--track-border-color);
 }
 
+.track--selected {
+    border-color: var(--primary-color);
+}
+
 .track {
     width: 100%;
 
@@ -23,6 +27,28 @@
     align-items: center;
 
     column-gap: 12px;
+}
+
+.image__wrapper {
+    position: relative;
+
+    width: 48px;
+    height: 48px;
+}
+
+.track__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: none;
+
+    pointer-events: none;
+}
+
+.track__wrapper:hover .track__play {
+    display: block;
 }
 
 .track__image {

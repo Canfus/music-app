@@ -4,3 +4,4 @@ export * from './playlist';
 export * from './Track';
 export * from './form';
 export * from './header';
+export * from './playlistThumb';

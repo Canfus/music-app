@@ -7,6 +7,7 @@ import type { AlbumSlice } from './playlistSlice.interface';
 
 const initialState: AlbumSlice = {
   playlist: [],
+  currentPlaylist: null,
 };
 
 export const playlistSlice = createSlice({
@@ -16,7 +17,15 @@ export const playlistSlice = createSlice({
     setPlaylists: (state, action: PayloadAction<Playlist[]>) => {
       state.playlist = action.payload;
     },
+    setCurrentPlaylist: (state, action: PayloadAction<Playlist>) => {
+      state.currentPlaylist = action.payload;
+    },
+    clearCurrentPlaylist: (state) => {
+      state.currentPlaylist = null;
+    },
   },
 });
 
-export const { setPlaylists } = playlistSlice.actions;
+// eslint-disable-next-line operator-linebreak
+export const { setPlaylists, setCurrentPlaylist, clearCurrentPlaylist } =
+  playlistSlice.actions;
