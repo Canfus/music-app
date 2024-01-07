@@ -30,16 +30,19 @@ export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
         <div className={styles.controls__wrapper}>
           <div className={styles['controls__music-control']}>
             <IconButton
+              variant="primary"
               disabled
               className={styles.button__control}
               icon={<BackIcon />}
             />
             <IconButton
+              variant="primary"
               onClick={() => setTrackState((prev) => !prev)}
               className={styles.button__control}
               icon={trackState ? <PauseIcon /> : <PlayIcon />}
             />
             <IconButton
+              variant="primary"
               className={styles.button__control}
               icon={<NextIcon />}
             />

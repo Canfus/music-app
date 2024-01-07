@@ -1,6 +1,6 @@
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'large' | 'medium';
-  variant?: 'plain' | 'outlined';
+  variant?: 'primary' | 'plain' | 'outlined';
   icon: React.ReactNode;
 }

@@ -58,6 +58,9 @@ body {
 
   --button-transition-delay: 100ms;
 
+  --icon-button-primary-color: #ff5733;
+  --icon-button-primary-bg-color: #363636;
+
   --input-border-color: #434343;
   --input-hover-border-color: #fff;
   --input-active-border-color: #ff5733;

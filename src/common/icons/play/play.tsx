@@ -1,34 +1,27 @@
 export const PlayIcon = () => (
   <svg
-    width="24px"
-    height="24px"
-    viewBox="-3 0 28 28"
-    version="1.1"
+    width="30"
+    height="30"
+    viewBox="0 0 30 30"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    fill="#000000"
-    stroke="#000000"
   >
-    <g strokeWidth="0" />
-    <g strokeLinecap="round" strokeLinejoin="round" />
-    <g>
-      <g
-        id="Page-1"
-        stroke="none"
-        strokeWidth="1"
-        fill="none"
-        fillRule="evenodd"
-      >
-        <g
-          id="Icon-Set-Filled"
-          transform="translate(-419.000000, -571.000000)"
-          fill="currentColor"
-        >
-          <path
-            d="M440.415,583.554 L421.418,571.311 C420.291,570.704 419,570.767 419,572.946 L419,597.054 C419,599.046 420.385,599.36 421.418,598.689 L440.415,586.446 C441.197,585.647 441.197,584.353 440.415,583.554"
-            id="play"
-          />
-        </g>
-      </g>
+    <mask
+      id="mask0_30_132"
+      // style="mask-type:alpha"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="30"
+      height="30"
+    >
+      <rect width="30" height="30" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_30_132)">
+      <path
+        d="M10 23.75V6.25L23.75 15L10 23.75ZM12.5 19.1875L19.0625 15L12.5 10.8125V19.1875Z"
+        fill="#FF5733"
+      />
     </g>
   </svg>
 );
