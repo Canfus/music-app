@@ -1,10 +1,14 @@
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
-import { Provider } from '@radix-ui/react-tooltip';
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 
 import { Router } from '@app/router';
-import { ErrorBoundaryFallback, SuspenseFallback } from '@app/common';
+import {
+  ErrorBoundaryFallback,
+  SuspenseFallback,
+  AuthProvider,
+} from '@app/common';
 
 import './App.css';
 
@@ -14,9 +18,11 @@ export const App = () => {
   return (
     <Suspense fallback={<SuspenseFallback />}>
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorBoundaryFallback}>
-        <Provider>
-          <Router />
-        </Provider>
+        <TooltipProvider>
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
+        </TooltipProvider>
       </ErrorBoundary>
     </Suspense>
   );

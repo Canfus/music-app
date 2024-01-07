@@ -1,8 +1,8 @@
+/* eslint-disable implicit-arrow-linebreak */
 import z from 'zod';
 
-export const schema = z.object({
-  username: z.string().min(1, { message: 'Введите логин' }).default(''),
-  password: z
+export const getPasswordValidationSchema = () =>
+  z
     .string()
     .superRefine((value, context) => {
       if (!value.length) {
@@ -41,7 +41,10 @@ export const schema = z.object({
         });
       }
     })
-    .default(''),
-});
+    .default('');
 
-export type Schema = z.infer<typeof schema>;
+export const getStringValidationSchema = (message: string) =>
+  z.string().min(1, { message }).default('');
+
+export const getEmailValidationSchema = () =>
+  z.string().email('Введите email').default('');
