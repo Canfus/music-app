@@ -1,0 +1,30 @@
+.layout {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('../../../assets/auth-bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: white;
+}
+
+.layout__404__image {
+  max-height: 500px;
+  max-width: 400px;
+}
+
+.header {
+  color: var(--primary-color);
+}
+
+.sub_header {
+  padding: 1rem 0 1rem 0;
+}

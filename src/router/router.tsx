@@ -1,7 +1,14 @@
 import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Layout, MainPage, AuthLayout, Login, Register } from '@app/pages';
+import {
+  Layout,
+  MainPage,
+  AuthLayout,
+  Login,
+  Register,
+  NotFound,
+} from '@app/pages';
 import { ProtectedRoute } from '@app/common';
 
 import { routenames } from './routenames';
@@ -17,5 +24,6 @@ export const Router: FC = () => (
       <Route path={routenames.LOGIN} element={<Login />} />
       <Route path={routenames.REGISTER} element={<Register />} />
     </Route>
+    <Route path={routenames.NOT_FOUND} element={<NotFound />} />
   </Routes>
 );

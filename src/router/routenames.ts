@@ -3,4 +3,5 @@ export const routenames = {
   AUTH: '/auth',
   LOGIN: 'login',
   REGISTER: 'register',
+  NOT_FOUND: '*',
 };
