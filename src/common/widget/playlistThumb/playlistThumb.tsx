@@ -42,8 +42,8 @@ export const PlaylistThumb = ({
       />
       <div className={styles.playlist__description}>
         {/* TODO: fix to real author name */}
-        <p className={styles.description__author}>Worldspawn</p>
-        <p className={styles.description__name}>{playlist.title}</p>
+        <p className={styles.description__author}>{playlist.title}</p>
+        <p className={styles.description__name}>Worldspawn</p>
       </div>
     </div>
   );
