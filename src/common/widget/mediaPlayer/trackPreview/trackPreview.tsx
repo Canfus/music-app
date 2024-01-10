@@ -45,7 +45,11 @@ export const TrackPreview: FC<TrackPreviewProps> = ({
       </div>
       <IconButton
         onClick={onLike}
-        style={favorite ? { color: 'var(--primary-color)' } : {}}
+        style={
+          favorite
+            ? { color: 'var(--primary-color)' }
+            : { color: 'var(--gray-color)' }
+        }
         icon={<LikeIcon />}
       />
     </div>
