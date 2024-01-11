@@ -46,7 +46,11 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       </div>
       <IconButton
         onClick={onLike}
-        style={favorite ? { color: 'var(--primary-color)' } : {}}
+        style={
+          favorite
+            ? { color: 'var(--primary-color)' }
+            : { color: 'var(--gray-color' }
+        }
         icon={<LikeIcon />}
       />
     </div>

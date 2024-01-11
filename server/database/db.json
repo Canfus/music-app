@@ -62,6 +62,104 @@
           "link": ""
         }
       ]
+    },
+    {
+      "id": 3,
+      "title": "Musicspawn",
+      "photo": "https://images.unsplash.com/photo-1541348263662-e068662d82af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEx1eHVyeXxlbnwwfHwwfHx8MA%3D%3D",
+      "music_list": [
+        {
+          "id": 3,
+          "photo": "https://avatars.yandex.net/get-music-content/103235/88a7aac1.a.7444823-1/50x50",
+          "author": "Moon Willis, Etta Bond",
+          "name": "I Like The Way",
+          "link": ""
+        },
+        {
+          "id": 4,
+          "photo": "https://avatars.yandex.net/get-music-content/5457712/ab138dec.a.18399058-1/50x50",
+          "author": "Someone like you",
+          "name": "NILETTO",
+          "link": ""
+        },
+        {
+          "id": 5,
+          "photo": "https://avatars.yandex.net/get-music-content/2441215/3e3dc14e.a.3481735-3/50x50",
+          "author": "One Dance",
+          "name": "Drake, WizKid, Kyla",
+          "link": ""
+        },
+        {
+          "id": 6,
+          "photo": "https://avatars.yandex.net/get-music-content/10139807/777fede9.a.26914580-1/50x50",
+          "author": "FEDUK, Biicla",
+          "name": "Я помню (Woo)",
+          "link": ""
+        },
+        {
+          "id": 7,
+          "photo": "https://avatars.yandex.net/get-music-content/9737237/67d28a02.a.26213006-1/50x50",
+          "author": "FEDUK, Markul",
+          "name": "Мятный (prod. by Shumno)",
+          "link": ""
+        },
+        {
+          "id": 8,
+          "photo": "https://avatars.yandex.net/get-music-content/9707577/8e2cfa70.a.26197618-1/50x50",
+          "author": "Slowed King",
+          "name": "Montagem Conga Conga",
+          "link": ""
+        },
+        {
+          "id": 9,
+          "photo": "https://avatars.yandex.net/get-music-content/6447985/458c45a5.a.22820453-1/50x50",
+          "author": "ANNA ASTI",
+          "name": "По барам",
+          "link": ""
+        },
+        {
+          "id": 10,
+          "photo": "https://avatars.yandex.net/get-music-content/10103188/c20dd05f.a.28960260-1/50x50",
+          "author": "ЛАУД, CREAM SODA",
+          "name": "Магия",
+          "link": ""
+        },
+        {
+          "id": 11,
+          "photo": "https://avatars.yandex.net/get-music-content/119639/c61f5fd3.a.7240601-1/50x50",
+          "author": "Gruppa Skryptonite",
+          "name": "Латинская музыка",
+          "link": ""
+        },
+        {
+          "id": 12,
+          "photo": "https://avatars.yandex.net/get-music-content/10092855/cd68315f.a.27160237-1/50x50",
+          "author": "Gruppa Skryptonite",
+          "name": "Скучаю",
+          "link": ""
+        },
+        {
+          "id": 13,
+          "photo": "https://avatars.yandex.net/get-music-content/10210263/0f8a0b60.a.26830456-1/50x50",
+          "author": "Gruppa Skryptonite, ЯАVЬ",
+          "name": "Берегом",
+          "link": ""
+        },
+        {
+          "id": 14,
+          "photo": "https://avatars.yandex.net/get-music-content/6447985/458c45a5.a.22820453-1/50x50",
+          "author": "ANNA ASTI",
+          "name": "Повело",
+          "link": ""
+        },
+        {
+          "id": 15,
+          "photo": "https://avatars.yandex.net/get-music-content/9837405/79d62e4d.a.26605629-1/50x50",
+          "author": "ANNA ASTI",
+          "name": "Царица",
+          "link": ""
+        }
+      ]
     }
   ]
 }
