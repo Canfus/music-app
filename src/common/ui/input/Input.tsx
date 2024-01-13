@@ -48,7 +48,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {placeholder}
         </label>
         {type === 'password' && (
-          <button className={styles.input__button} onClick={onToggleHide}>
+          <button
+            type="button"
+            className={styles.input__button}
+            onClick={onToggleHide}
+          >
             {inputType === 'password' ? (
               <PasswordShowIcon />
             ) : (
