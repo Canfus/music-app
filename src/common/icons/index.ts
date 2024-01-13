@@ -10,3 +10,4 @@ export { ProfileIcon } from './profile';
 export { Cat404 } from './cat404';
 export * from './volume';
 export * from './logo';
+export * from './password';
