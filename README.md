@@ -1,30 +1,92 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="public/banner.png">
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- Prototype / Pre-Alpha / Alpha / Beta / Release  -->
 
-Currently, two official plugins are available:
+<div align="center">
+<br>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Canfus/music-app/main)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Canfus/music-app)
+![Development Stage](https://img.shields.io/badge/Development_Stage-Prototype-blue)
 
-## Expanding the ESLint configuration
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Features:
 
-- Configure the top-level `parserOptions` property like this:
+- Free unlimited music playback.
+- User profiles.
+- Custom playlists with ability to share.
+- "Suggested" playlist, based on your listen history.
+- Discord Rich Presence.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Installation
+
+Clone the repository:
+
+```
+git clone https://github.com/Canfus/music-app.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Open the repository root folder and install frontend dependencies:
+
+```
+cd music-app
+npm ci
+```
+
+Do the same for backend:
+
+```
+cd server
+npm ci
+```
+
+## Usage
+
+To start the development server, run the following command:
+
+```
+npm run dev
+
+# or start them separately:
+npm run dev:server
+npm run dev:client
+```
+
+To build the project, run the following command:
+
+```
+npm run build
+```
+
+To lint files in `src` directory, run the following command:
+
+```
+npm run lint
+```
+
+To format the code by using `Prettier`, run the following command:
+
+```
+npm run format
+```
+
+To build & start the `Storybook` documentation server, run the following command:
+
+```
+npm run build-storybook
+npm run storybook
+```
+
+## Scripts
+
+- `dev`: Starts both the server and client side.
+- `dev:client`: Starts the client side using Vite.
+- `dev:server`: Starts the development server using Nodemon.
+- `build`: Builds the project with TypeScript and Vite.
+- `lint`: Lints the TypeScript files in the `src` directory using ESLint.
+- `format`: Formats the code using Prettier.
+- `build-storybook`: Builds the Storybook documentation.
+- `storybook`: Starts the Storybook server on port 6006.
