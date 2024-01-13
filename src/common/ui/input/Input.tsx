@@ -7,7 +7,7 @@ import { InputProps } from './input.interface';
 import styles from './input.module.css';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ invalid, className, id, placeholder, type, ...props }, ref) => {
+  ({ invalid, className, id, placeholder, type, value, ...props }, ref) => {
     const [isHiding, setIsHiding] = useState<boolean>(true);
 
     const inputType = useMemo<React.HTMLInputTypeAttribute | undefined>(() => {
@@ -42,12 +42,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           })}
           id={id}
           placeholder={placeholder}
+          value={value}
           {...props}
         />
         <label className={styles.input__label} htmlFor={id}>
           {placeholder}
         </label>
-        {type === 'password' && (
+        {type === 'password' && value && (
           <button
             type="button"
             className={styles.input__button}
