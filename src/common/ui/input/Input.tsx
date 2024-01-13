@@ -12,10 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const inputType = useMemo<React.HTMLInputTypeAttribute | undefined>(() => {
       if (type === 'password') {
-        if (isHiding) {
-          return 'password';
-        }
-        return 'text';
+        return isHiding ? 'password' : 'text';
       }
       return type;
     }, [type, isHiding]);
