@@ -17,7 +17,7 @@ export const NotFound = () => {
       <div className={styles.page__content}>
         <h1 className={styles.content__title}>Whoops. Page not found</h1>
         <Cat404 />
-        <Button variant="secondary" onClick={onNavigateClick}>
+        <Button variant="outlined" onClick={onNavigateClick}>
           Go to main
         </Button>
       </div>
