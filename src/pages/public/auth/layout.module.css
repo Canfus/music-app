@@ -18,21 +18,3 @@
   top: 0;
   left: 0;
 }
-
-/* 404 Page */
-
-.page404 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.page404__label {
-  color: var(--primary-color);
-}
-
-.page404__sub_label {
-  color: white;
-  padding: 1rem 0 1rem 0;
-}

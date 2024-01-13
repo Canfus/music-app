@@ -1,23 +1,26 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Header } from '@app/common';
-import { Cat404 } from '@app/common/icons/cat404';
+import { Header, Cat404, Button } from '@app/common';
 
-import styles from '../auth/layout.module.css';
+import styles from './notFound.module.css';
 
-export const NotFound = () => (
-  <div>
-    <Header />
-    <div className={styles.layout}>
-      <div className={styles.page404}>
-        <h1 className={styles.page404__label}>Whoops. Page not found.</h1>
-        <h3 className={styles.page404__sub_label}>
-          Pet the &quot;Music Cat&quot; to return.
-        </h3>
-        <Link to="/">
-          <Cat404 />
-        </Link>
+export const NotFound = () => {
+  const navigate = useNavigate();
+
+  const onNavigateClick = () => {
+    navigate('/');
+  };
+
+  return (
+    <div className={styles.page}>
+      <Header className={styles.page__header} />
+      <div className={styles.page__content}>
+        <h1 className={styles.content__title}>Whoops. Page not found</h1>
+        <Cat404 />
+        <Button variant="secondary" onClick={onNavigateClick}>
+          Go to main
+        </Button>
       </div>
     </div>
-  </div>
-);
+  );
+};
