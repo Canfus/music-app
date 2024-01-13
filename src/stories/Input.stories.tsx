@@ -61,3 +61,11 @@ export const Invalid: Story = {
     invalid: true,
   },
 };
+
+export const Password: Story = {
+  args: {
+    placeholder: 'Enter your password',
+    id: '4',
+    type: 'password',
+  },
+};
