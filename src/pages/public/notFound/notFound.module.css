@@ -1,0 +1,38 @@
+.page {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: url("/src/assets/auth-bg.svg") no-repeat;
+    background-size: cover;
+}
+
+.page__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.page__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    row-gap: 40px;
+
+    padding: 16px;
+}
+
+.content__title {
+    color: var(--primary-color);
+}
+
+.content__label {
+    color: var(--white-color);
+}
