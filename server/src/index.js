@@ -11,6 +11,58 @@ const tracklistRouter = jsonServer.router('./database/tracklist.json');
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
+server.post('/dislike', (req, res) => {
+  const { user_id, track_id } = req.body;
+
+  if (!user_id) {
+    return res.status(400).json({
+      error: 'user id is required',
+    });
+  }
+
+  if (!track_id) {
+    return res.status(400).json({
+      error: 'track id is required',
+    });
+  }
+
+  const user = usersRouter.db.get('users').find({ id: user_id });
+
+  const foundIndex = user
+    .value()
+    .playlist[0].music_list.findIndex((track) => track.id === track_id);
+
+  user.get('playlist[0].music_list').splice(foundIndex, 1).write();
+
+  return res.json({
+    message: 'success',
+  });
+});
+
+server.post('/like', (req, res) => {
+  const { user_id, track_id } = req.body;
+
+  if (!user_id) {
+    return res.status(400).json({
+      error: 'user id is required',
+    });
+  }
+
+  if (!track_id) {
+    return res.status(400).json({
+      error: 'track id is required',
+    });
+  }
+
+  const user = usersRouter.db.get('users').find({ id: user_id });
+
+  user.get('playlist[0].music_list').push(track_id).write();
+
+  return res.json({
+    message: 'success',
+  });
+});
+
 server.get('/playlists', (req, res) => {
   const { user_id } = req.query;
 
