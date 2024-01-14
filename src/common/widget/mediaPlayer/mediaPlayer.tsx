@@ -21,7 +21,9 @@ export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
 
   const [trackState, setTrackState] = useState<boolean>(false);
   const [playerState, setPlayerState] = useState<number[]>([0]);
-  const [volume, setVolume] = useState<number[]>([0]);
+  const [volume, setVolume] = useState<number[]>([50]);
+
+  if (!track) return null;
 
   return (
     <div className={classNames(styles.player__wrapper, className)} {...props}>
@@ -47,7 +49,7 @@ export const MediaPlayer: FC<MediaPlayerProps> = ({ className, ...props }) => {
               icon={<NextIcon />}
             />
           </div>
-          <TrackPreview track={track!} />
+          <TrackPreview track={track} />
         </div>
         <Volume volume={volume} onVolumeChange={setVolume} />
       </div>

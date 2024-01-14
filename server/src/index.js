@@ -1,5 +1,3 @@
-const users = require('../database/users.json');
-
 const jsonServer = require('json-server');
 
 const server = jsonServer.create();
@@ -8,9 +6,42 @@ const middlewares = jsonServer.defaults();
 
 const playlistsRouter = jsonServer.router('./database/db.json');
 const usersRouter = jsonServer.router('./database/users.json');
+const tracklistRouter = jsonServer.router('./database/tracklist.json');
 
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
+
+server.get('/playlists', (req, res) => {
+  const { user_id } = req.query;
+
+  const { tracklist } = tracklistRouter.db.getState();
+  const { playlists } = playlistsRouter.db.getState();
+  const user = usersRouter.db
+    .getState()
+    .users.find((user) => user.id === Number(user_id));
+
+  const response = playlists.map((playlist) => ({
+    ...playlist,
+    music_list: playlist.music_list.map((trackId) => {
+      for (let i = 0; i < tracklist.length; i += 1) {
+        const track = tracklist[i];
+
+        if (track.id === trackId) {
+          return {
+            ...track,
+            favorite: Boolean(
+              user?.playlist[0].music_list.find(
+                (trackId) => trackId === track.id,
+              ),
+            ),
+          };
+        }
+      }
+    }),
+  }));
+
+  return res.json(response);
+});
 
 server.post('/register', (req, res) => {
   const { username, email, password, repeat_password } = req.body;

@@ -3,6 +3,6 @@ export interface Track {
   photo?: string;
   name: string;
   author: string;
-  // favorite: boolean; TODO: fix it later
+  favorite: boolean;
   link: string;
 }

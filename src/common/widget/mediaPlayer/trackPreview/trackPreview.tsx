@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 
 import {
@@ -16,16 +16,14 @@ export const TrackPreview: FC<TrackPreviewProps> = ({
   className,
   ...props
 }) => {
-  const [favorite, setFavorite] = useState<boolean>(false);
-
   const onLike = () => {
-    setFavorite((prev) => !prev);
+    // setFavorite((prev) => !prev);
   };
 
   return (
     <div className={classNames(styles.preview__wrapper)} {...props}>
       <div className={styles.photo__wrapper}>
-        {track?.photo ? (
+        {track.photo ? (
           <img
             className={styles.preview__photo}
             src={track.photo}
@@ -37,16 +35,16 @@ export const TrackPreview: FC<TrackPreviewProps> = ({
       </div>
       <div
         className={styles.preview__info}
-        onClick={() => copyToClipboard(`${track?.author} - ${track?.name}`)}
+        onClick={() => copyToClipboard(`${track.author} - ${track.name}`)}
         aria-hidden
       >
-        <span className={styles.info__trackname}>{track?.name}</span>
-        <span className={styles.info__author}>{track?.author}</span>
+        <span className={styles.info__trackname}>{track.name}</span>
+        <span className={styles.info__author}>{track.author}</span>
       </div>
       <IconButton
         onClick={onLike}
         style={
-          favorite
+          track.favorite
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color)' }
         }

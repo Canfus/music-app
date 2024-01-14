@@ -8,7 +8,7 @@ import { TrackProps } from './track.interface';
 import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(track.favorite);
 
   const { track: currentTrack } = useAppSelector(
     (store) => store.musicPlayerSlice,

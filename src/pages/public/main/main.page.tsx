@@ -15,8 +15,9 @@ export const MainPage = () => {
   const dispatch = useAppDispatch();
 
   const { currentPlaylist } = useAppSelector((store) => store.albumSlice);
+  const { user } = useAppSelector((store) => store.userSlice);
 
-  const { data: playlists } = usePlaylistsQuery();
+  const { data: playlists } = usePlaylistsQuery(user?.id!);
 
   useLayoutEffect(() => {
     dispatch(setPlaylists(playlists));
