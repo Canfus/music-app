@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 import { PlaylistThumb, Playlist, Header } from '@app/common';
 import {
@@ -14,12 +14,11 @@ import styles from './main.module.css';
 export const MainPage = () => {
   const dispatch = useAppDispatch();
 
-  const { currentPlaylist } = useAppSelector((store) => store.albumSlice);
   const { user } = useAppSelector((store) => store.userSlice);
 
   const { data: playlists } = usePlaylistsQuery(user?.id!);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(setPlaylists(playlists));
     dispatch(setTrack(playlists[0].music_list[0]));
   }, [dispatch, playlists]);
@@ -33,10 +32,7 @@ export const MainPage = () => {
             <PlaylistThumb key={playlist.id} playlist={playlist} />
           ))}
         </div>
-        <Playlist
-          playlist={currentPlaylist}
-          className={styles.playlist__selected}
-        />
+        <Playlist className={styles.playlist__selected} />
       </div>
     </div>
   );

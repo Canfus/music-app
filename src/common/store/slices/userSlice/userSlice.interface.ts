@@ -1,8 +1,8 @@
 import type { Playlist } from '@app/api';
 
 interface User {
-  id: number | null;
-  username: string | null;
+  id: number;
+  username: string;
   playlist: Playlist[];
 }
 

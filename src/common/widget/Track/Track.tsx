@@ -1,22 +1,43 @@
 import classNames from 'classnames';
-import { FC, useState, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { IconButton, LikeIcon, PlayIcon } from '@app/common';
 import { useAppSelector } from '@app/common/store';
+import { useLikeMutation, useDislikeMutation } from '@app/api';
 
 import { TrackProps } from './track.interface';
 import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
-  const [favorite, setFavorite] = useState(track.favorite);
+  const queryClient = useQueryClient();
 
   const { track: currentTrack } = useAppSelector(
     (store) => store.musicPlayerSlice,
   );
+  const { user } = useAppSelector((store) => store.userSlice);
+
+  const { mutate: like } = useLikeMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tracklist'] });
+    },
+  });
+  const { mutate: dislike } = useDislikeMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tracklist'] });
+    },
+  });
+
+  if (!user) return null;
 
   const onLike: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-    setFavorite((prev) => !prev);
+
+    if (track.favorite) {
+      dislike({ user_id: user.id, track_id: track.id });
+      return;
+    }
+    like({ user_id: user.id, track_id: track.id });
   };
 
   return (
@@ -47,7 +68,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       <IconButton
         onClick={onLike}
         style={
-          favorite
+          track.favorite
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color' }
         }

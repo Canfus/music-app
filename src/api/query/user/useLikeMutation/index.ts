@@ -1,0 +1,1 @@
+export { useLikeMutation } from './useLikeMutation';
