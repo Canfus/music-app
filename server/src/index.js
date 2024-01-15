@@ -28,11 +28,12 @@ server.post('/dislike', (req, res) => {
 
   const user = usersRouter.db.get('users').find({ id: user_id });
 
-  const foundIndex = user
-    .value()
-    .playlist[0].music_list.findIndex((track) => track.id === track_id);
+  const userPlaylist = user.get('playlist[0].music_list');
+  const playlistTrackIndex = userPlaylist.indexOf(track_id);
 
-  user.get('playlist[0].music_list').splice(foundIndex, 1).write();
+  if (playlistTrackIndex > -1) {
+    userPlaylist.splice(playlistTrackIndex, 1).write();
+  }
 
   return res.json({
     message: 'success',
@@ -56,7 +57,12 @@ server.post('/like', (req, res) => {
 
   const user = usersRouter.db.get('users').find({ id: user_id });
 
-  user.get('playlist[0].music_list').push(track_id).write();
+  const userPlaylist = user.get('playlist[0].music_list');
+  const playlistTrackIndex = userPlaylist.indexOf(track_id);
+
+  if (playlistTrackIndex < 1) {
+    userPlaylist.push(track_id).write();
+  }
 
   return res.json({
     message: 'success',
