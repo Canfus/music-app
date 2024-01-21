@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { mongoClient, getDatabase, getObjectId } from '../mongo';
 import { USERS_COLLECTION } from '../utils';
-import type { Error } from '../api';
+import { Exception } from '../api';
 
 export const usersRouter = Router();
 
@@ -27,25 +27,38 @@ usersRouter.get('/users/:userId', async (req, res) => {
   const { userId } = req.params;
 
   if (userId.length !== 24) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'invalid userId',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['invalid userId'],
       },
-    };
+    });
+
+    // const error: Exception<object> = {
+    //   status: 400,
+    //   message: {
+    //     nonFieldErrors: ['invalid userId'],
+    //   },
+    // };
 
     return res.status(error.status).json(error);
   }
 
   if (!userId) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'userId is required',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['userId is required'],
       },
-    };
+    });
+
+    // const error: Error = {
+    //   status: 400,
+    //   message: {
+    //     customError: 'userId is required',
+    //     fieldErrors: [],
+    //   },
+    // };
 
     return res.status(error.status).json(error);
   }
@@ -59,13 +72,20 @@ usersRouter.get('/users/:userId', async (req, res) => {
     const user = await collection.findOne({ _id: getObjectId(userId) });
 
     if (!user) {
-      const error: Error = {
+      const error = new Exception({
         status: 404,
-        message: {
-          customError: 'user not found',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['user not found'],
         },
-      };
+      });
+
+      // const error: Error = {
+      //   status: 404,
+      //   message: {
+      //     customError: 'user not found',
+      //     fieldErrors: [],
+      //   },
+      // };
 
       return res.status(error.status).json(error);
     }

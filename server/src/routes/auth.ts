@@ -2,8 +2,8 @@ import { Router } from 'express';
 
 import { mongoClient, getDatabase } from '../mongo';
 import { USERS_COLLECTION } from '../utils';
-import { User } from '../api';
-import type { Error, LoginCredentials, RegisterCredentials } from '../api';
+import { User, Exception } from '../api';
+import type { LoginCredentials, RegisterCredentials } from '../api';
 
 export const authRouter = Router();
 
@@ -11,13 +11,12 @@ authRouter.post('/login', async (req, res) => {
   const credentials = req.body as LoginCredentials;
 
   if (!credentials.username || !credentials.password) {
-    const error: Error = {
+    const error = new Exception<LoginCredentials>({
       status: 400,
-      message: {
-        customError: 'email and password is required',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['username and password is required'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
@@ -31,12 +30,12 @@ authRouter.post('/login', async (req, res) => {
     const user = await collection.findOne({ username: credentials.username });
 
     if (!user) {
-      const error: Error = {
+      const error = new Exception<LoginCredentials>({
         status: 404,
-        message: {
-          fieldErrors: [{ email: 'user not found' }],
+        details: {
+          fieldErrors: [{ username: 'user not found' }],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }
@@ -47,16 +46,16 @@ authRouter.post('/login', async (req, res) => {
     ) {
       const credentialsKeys = Object.keys(
         credentials,
-      ) as (keyof typeof credentials)[];
+      ) as (keyof LoginCredentials)[];
 
-      const error: Error = {
+      const error = new Exception<LoginCredentials>({
         status: 400,
-        message: {
+        details: {
           fieldErrors: credentialsKeys
             .filter((key) => user[key] !== credentials[key])
             .map((key) => ({ [key]: `invalid ${key}` })),
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }
@@ -78,25 +77,25 @@ authRouter.post('/register', async (req, res) => {
     !credentials.password ||
     !credentials.repeat_password
   ) {
-    const error: Error = {
+    const error = new Exception<RegisterCredentials>({
       status: 400,
-      message: {
-        customError: 'data is required',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['data is required'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
 
   if (credentials.password !== credentials.repeat_password) {
-    const error: Error = {
+    const error = new Exception<RegisterCredentials>({
       status: 400,
-      message: {
-        customError: "password and confirm password doesn't match",
-        fieldErrors: [],
+      details: {
+        fieldErrors: [
+          { repeat_password: "password and confirm password doesn't match" },
+        ],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
@@ -112,13 +111,12 @@ authRouter.post('/register', async (req, res) => {
     const user = await collection.findOne({ email: data.email });
 
     if (user) {
-      const error: Error = {
+      const error = new Exception<RegisterCredentials>({
         status: 400,
-        message: {
-          customError: 'user already exists',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['user already exists'],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }

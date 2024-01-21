@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { mongoClient, getDatabase, getObjectId } from '../mongo';
 import { TRACKLIST_COLLECTION } from '../utils';
-import type { Error } from '../api';
+import { Exception } from '../api';
 
 export const tracklistRouter = Router();
 
@@ -16,13 +16,12 @@ tracklistRouter.get('/tracklist', async (_, res) => {
     const tracklist = await collection.find({}).toArray();
 
     if (!tracklist) {
-      const error: Error = {
+      const error = new Exception({
         status: 404,
-        message: {
-          customError: 'tracklist is empty',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['tracklist is empty'],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }
@@ -39,25 +38,23 @@ tracklistRouter.get('/tracklist/:trackId', async (req, res) => {
   const { trackId } = req.params;
 
   if (trackId.length !== 24) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'invalid trackId',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['invalid trackId'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
 
   if (!trackId) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'trackId is required',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['trackId is required'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
@@ -71,13 +68,12 @@ tracklistRouter.get('/tracklist/:trackId', async (req, res) => {
     const track = await collection.findOne({ _id: getObjectId(trackId) });
 
     if (!track) {
-      const error: Error = {
+      const error = new Exception({
         status: 404,
-        message: {
-          customError: 'track not found',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['track not found'],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }

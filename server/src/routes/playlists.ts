@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { mongoClient, getDatabase, getObjectId } from '../mongo';
 import { PLAYLISTS_COLLECTION } from '../utils';
-import { Error } from '../api';
+import { Exception } from '../api';
 
 export const playlistsRouter = Router();
 
@@ -16,13 +16,12 @@ playlistsRouter.get('/playlists', async (_, res) => {
     const playlists = await collection.find({}).toArray();
 
     if (!playlists) {
-      const error: Error = {
+      const error = new Exception({
         status: 404,
-        message: {
-          customError: 'playlists is empty',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['playlists is empty'],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }
@@ -39,25 +38,23 @@ playlistsRouter.get('/playlists/:playlistId', async (req, res) => {
   const { playlistId } = req.params;
 
   if (playlistId.length !== 24) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'invalid playlistId',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['invalid playlistId'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
 
   if (!playlistId) {
-    const error: Error = {
+    const error = new Exception({
       status: 400,
-      message: {
-        customError: 'playlistId is required',
-        fieldErrors: [],
+      details: {
+        nonFieldErrors: ['playlistId is required'],
       },
-    };
+    });
 
     return res.status(error.status).json(error);
   }
@@ -71,13 +68,12 @@ playlistsRouter.get('/playlists/:playlistId', async (req, res) => {
     const playlist = await collection.findOne({ _id: getObjectId(playlistId) });
 
     if (!playlist) {
-      const error: Error = {
+      const error = new Exception({
         status: 404,
-        message: {
-          customError: 'playlist not found',
-          fieldErrors: [],
+        details: {
+          nonFieldErrors: ['playlist not found'],
         },
-      };
+      });
 
       return res.status(error.status).json(error);
     }
