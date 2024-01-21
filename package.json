@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:client": "vite --host --port 3000",
-    "dev:server": "cd ./server && npm run start",
+    "dev:server": "cd ./server && npm run dev",
     "dev": "concurrently npm:dev:*",
     "build": "tsc && vite build",
     "tsc": "npx tsc",
@@ -27,6 +27,8 @@
     "@tanstack/react-query": "^5.14.2",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.12",
