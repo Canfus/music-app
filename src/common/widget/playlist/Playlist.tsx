@@ -3,17 +3,15 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 import { Track } from '@app/common';
-import { useAppDispatch, setTrack } from '@app/common/store';
+import { useAppDispatch, setTrack, useAppSelector } from '@app/common/store';
 
 import type { PlaylistProps } from './playlist.interface';
 import styles from './playlist.module.css';
 
-export const Playlist: FC<PlaylistProps> = ({
-  playlist,
-  className,
-  ...props
-}) => {
+export const Playlist: FC<PlaylistProps> = ({ className, ...props }) => {
   const dispatch = useAppDispatch();
+
+  const playlist = useAppSelector((store) => store.albumSlice.currentPlaylist);
 
   return playlist ? (
     <div {...props} className={classNames(styles.playlist__wrapper, className)}>
@@ -25,15 +23,11 @@ export const Playlist: FC<PlaylistProps> = ({
         />
         <div className={styles.playlist__info}>
           <h2 className={styles.playlist__title}>{playlist.title}</h2>
-          {/* TODO: replace to real author */}
-          <p className={styles.playlist__author}>Worldspawn</p>
+          <p className={styles.playlist__author}>{playlist.author}</p>
           <p className={styles.playlist__count}>
             {`${playlist.music_list.length} tracks`}
           </p>
-          {/* TODO: replace to real description */}
-          <p className={styles.playlist__description}>
-            This is description of playlist
-          </p>
+          <p className={styles.playlist__description}>{playlist.description}</p>
         </div>
       </div>
       <div className={styles.playlist__list}>

@@ -5,6 +5,7 @@ import {
   useAppDispatch,
   setCurrentPlaylist,
 } from '@app/common/store';
+import { usePlaylistMutation } from '@app/api';
 
 import type { PlaylistThumbProps } from './playlistThumb.interface';
 import styles from './playlistThumb.module.css';
@@ -16,7 +17,21 @@ export const PlaylistThumb = ({
 }: PlaylistThumbProps) => {
   const dispatch = useAppDispatch();
 
-  const { currentPlaylist } = useAppSelector((store) => store.albumSlice);
+  const currentPlaylist = useAppSelector(
+    (store) => store.albumSlice.currentPlaylist,
+  );
+
+  const { mutate } = usePlaylistMutation({
+    onSuccess: (newPlaylist) => {
+      dispatch(setCurrentPlaylist(newPlaylist));
+    },
+  });
+
+  const onPlaylistSelect = () => {
+    if (currentPlaylist?._id !== playlist._id) {
+      mutate(playlist._id);
+    }
+  };
 
   return (
     <div
@@ -28,7 +43,7 @@ export const PlaylistThumb = ({
         },
         className,
       )}
-      onClick={() => dispatch(setCurrentPlaylist(playlist))}
+      onClick={onPlaylistSelect}
       role="button"
       tabIndex={0}
       aria-hidden

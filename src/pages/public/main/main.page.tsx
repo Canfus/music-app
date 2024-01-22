@@ -33,7 +33,7 @@ export const MainPage = () => {
           ))}
         </div>
         <Playlist
-          playlist={currentPlaylist}
+          // playlist={currentPlaylist}
           className={styles.playlist__selected}
         />
       </div>

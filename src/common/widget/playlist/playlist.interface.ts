@@ -1,5 +1,3 @@
-import type { Playlist } from '@app/api';
+// import type { Playlist } from '@app/api';
 
-export interface PlaylistProps extends React.HTMLAttributes<HTMLDivElement> {
-  playlist: Playlist | null;
-}
+export interface PlaylistProps extends React.HTMLAttributes<HTMLDivElement> {}
