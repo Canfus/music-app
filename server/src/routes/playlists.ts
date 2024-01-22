@@ -26,25 +26,7 @@ playlistsRouter.get('/playlists', async (_, res) => {
       return res.status(error.status).json(error);
     }
 
-    const trackCollection = db.collection(TRACKLIST_COLLECTION);
-
-    const play_lists = [];
-
-    for (const playlist of playlists) {
-      const musicList = [];
-      for (const trackId of playlist.music_list) {
-        const track = await trackCollection.findOne({
-          _id: getObjectId(trackId),
-        });
-        musicList.push(track);
-      }
-      play_lists.push({
-        ...playlist,
-        music_list: musicList,
-      });
-    }
-
-    return res.json(play_lists);
+    return res.json(playlists);
   } catch (error) {
     console.log(error);
   } finally {
