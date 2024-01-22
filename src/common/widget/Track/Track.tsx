@@ -24,7 +24,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       className={classNames(
         styles.track__wrapper,
         {
-          [styles['track--selected']]: currentTrack?.id === track.id,
+          [styles['track--selected']]: currentTrack?._id === track._id,
         },
         className,
       )}

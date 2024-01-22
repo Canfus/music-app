@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { mongoClient, getDatabase, getObjectId } from '../mongo';
-import { PLAYLISTS_COLLECTION } from '../utils';
+import { PLAYLISTS_COLLECTION, TRACKLIST_COLLECTION } from '../utils';
 import { Exception } from '../api';
 
 export const playlistsRouter = Router();
@@ -26,7 +26,25 @@ playlistsRouter.get('/playlists', async (_, res) => {
       return res.status(error.status).json(error);
     }
 
-    return res.json(playlists);
+    const trackCollection = db.collection(TRACKLIST_COLLECTION);
+
+    const play_lists = [];
+
+    for (const playlist of playlists) {
+      const musicList = [];
+      for (const trackId of playlist.music_list) {
+        const track = await trackCollection.findOne({
+          _id: getObjectId(trackId),
+        });
+        musicList.push(track);
+      }
+      play_lists.push({
+        ...playlist,
+        music_list: musicList,
+      });
+    }
+
+    return res.json(play_lists);
   } catch (error) {
     console.log(error);
   } finally {
@@ -78,7 +96,20 @@ playlistsRouter.get('/playlists/:playlistId', async (req, res) => {
       return res.status(error.status).json(error);
     }
 
-    return res.json(playlist);
+    const trackCollection = db.collection(TRACKLIST_COLLECTION);
+
+    const musicList = [];
+    for (const trackId of playlist.music_list) {
+      const track = await trackCollection.findOne({
+        _id: getObjectId(trackId),
+      });
+      musicList.push(track);
+    }
+
+    return res.json({
+      ...playlist,
+      music_list: musicList,
+    });
   } catch (error) {
     console.log(error);
   } finally {

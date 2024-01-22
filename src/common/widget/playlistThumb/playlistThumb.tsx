@@ -24,7 +24,7 @@ export const PlaylistThumb = ({
       className={classNames(
         styles.playlist__wrapper,
         {
-          [styles['playlist--selected']]: currentPlaylist?.id === playlist.id,
+          [styles['playlist--selected']]: currentPlaylist?._id === playlist._id,
         },
         className,
       )}
@@ -41,9 +41,8 @@ export const PlaylistThumb = ({
         draggable={false}
       />
       <div className={styles.playlist__description}>
-        {/* TODO: fix to real author name */}
         <p className={styles.description__author}>{playlist.title}</p>
-        <p className={styles.description__name}>Worldspawn</p>
+        <p className={styles.description__name}>{playlist.author}</p>
       </div>
     </div>
   );

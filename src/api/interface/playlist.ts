@@ -1,8 +1,9 @@
 import { Track } from './track';
 
 export interface Playlist {
-  id: number;
+  _id: number;
   title: string;
+  author: string;
   photo: string;
   music_list: Track[];
 }

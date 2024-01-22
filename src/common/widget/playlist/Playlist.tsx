@@ -39,7 +39,7 @@ export const Playlist: FC<PlaylistProps> = ({
       <div className={styles.playlist__list}>
         {playlist.music_list.map((track) => (
           <Track
-            key={track.id}
+            key={track._id}
             onClick={() => dispatch(setTrack(track))}
             className={styles.track}
             track={track}

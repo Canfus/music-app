@@ -29,7 +29,7 @@ export const MainPage = () => {
       <div className={styles.page__playlists__wrapper}>
         <div className={styles.page__playlists}>
           {playlists.map((playlist) => (
-            <PlaylistThumb key={playlist.id} playlist={playlist} />
+            <PlaylistThumb key={playlist._id} playlist={playlist} />
           ))}
         </div>
         <Playlist
