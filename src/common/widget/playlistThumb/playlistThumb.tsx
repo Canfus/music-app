@@ -6,6 +6,7 @@ import {
   setCurrentPlaylist,
 } from '@app/common/store';
 import { usePlaylistMutation } from '@app/api';
+import { Loader } from '@app/common';
 
 import type { PlaylistThumbProps } from './playlistThumb.interface';
 import styles from './playlistThumb.module.css';
@@ -21,7 +22,7 @@ export const PlaylistThumb = ({
     (store) => store.albumSlice.currentPlaylist,
   );
 
-  const { mutate } = usePlaylistMutation({
+  const { mutate, isPending: isLoading } = usePlaylistMutation({
     onSuccess: (newPlaylist) => {
       dispatch(setCurrentPlaylist(newPlaylist));
     },
@@ -40,6 +41,7 @@ export const PlaylistThumb = ({
         styles.playlist__wrapper,
         {
           [styles['playlist--selected']]: currentPlaylist?._id === playlist._id,
+          [styles['playlist--loading']]: isLoading,
         },
         className,
       )}
@@ -49,6 +51,11 @@ export const PlaylistThumb = ({
       aria-hidden
       aria-label={`Select playlist ${playlist.title}`}
     >
+      {isLoading && (
+        <div className={styles.playlist__loader}>
+          <Loader />
+        </div>
+      )}
       <img
         src={playlist.photo}
         alt={playlist.photo}

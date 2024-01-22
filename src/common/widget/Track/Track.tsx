@@ -28,6 +28,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
         },
         className,
       )}
+      aria-label="Select track"
       {...props}
     >
       <div className={styles.track}>
