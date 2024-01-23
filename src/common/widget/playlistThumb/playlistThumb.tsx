@@ -22,7 +22,7 @@ export const PlaylistThumb = ({
     (store) => store.albumSlice.currentPlaylist,
   );
 
-  const { refetch, isLoading } = usePlaylistQuery(playlist._id);
+  const { refetch, isFetching: isLoading } = usePlaylistQuery(playlist._id);
 
   const onPlaylistSelect = () => {
     if (currentPlaylist?._id !== playlist._id) {
