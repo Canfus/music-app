@@ -5,7 +5,7 @@ import {
   useAppDispatch,
   setCurrentPlaylist,
 } from '@app/common/store';
-import { usePlaylistMutation } from '@app/api';
+import { usePlaylistQuery } from '@app/api';
 import { Loader } from '@app/common';
 
 import type { PlaylistThumbProps } from './playlistThumb.interface';
@@ -22,15 +22,15 @@ export const PlaylistThumb = ({
     (store) => store.albumSlice.currentPlaylist,
   );
 
-  const { mutate, isPending: isLoading } = usePlaylistMutation({
-    onSuccess: (newPlaylist) => {
-      dispatch(setCurrentPlaylist(newPlaylist));
-    },
-  });
+  const { refetch, isLoading } = usePlaylistQuery(playlist._id);
 
   const onPlaylistSelect = () => {
     if (currentPlaylist?._id !== playlist._id) {
-      mutate(playlist._id);
+      refetch().then(({ data }) => {
+        if (data) {
+          dispatch(setCurrentPlaylist(data));
+        }
+      });
     }
   };
 

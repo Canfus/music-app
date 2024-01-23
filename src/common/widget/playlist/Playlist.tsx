@@ -3,14 +3,12 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 import { Track } from '@app/common';
-import { useAppDispatch, setTrack, useAppSelector } from '@app/common/store';
+import { useAppSelector } from '@app/common/store';
 
 import type { PlaylistProps } from './playlist.interface';
 import styles from './playlist.module.css';
 
 export const Playlist: FC<PlaylistProps> = ({ className, ...props }) => {
-  const dispatch = useAppDispatch();
-
   const playlist = useAppSelector((store) => store.albumSlice.currentPlaylist);
 
   return playlist ? (
@@ -32,12 +30,7 @@ export const Playlist: FC<PlaylistProps> = ({ className, ...props }) => {
       </div>
       <div className={styles.playlist__list}>
         {playlist.music_list.map((track) => (
-          <Track
-            key={track._id}
-            onClick={() => dispatch(setTrack(track))}
-            className={styles.track}
-            track={track}
-          />
+          <Track key={track._id} className={styles.track} track={track} />
         ))}
       </div>
     </div>

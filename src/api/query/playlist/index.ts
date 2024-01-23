@@ -1,1 +1,2 @@
-export { usePlaylistMutation } from './usePlaylistMutation';
+export { usePlaylistQuery } from './usePlaylistQuery';
+export { usePlaylistsQuery } from './usePlaylistsQuery';

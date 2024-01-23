@@ -1,22 +1,40 @@
 import classNames from 'classnames';
-import { FC, useState, MouseEventHandler } from 'react';
+import { FC, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
+import { useTrackQuery } from '@app/api';
 import { IconButton, LikeIcon, PlayIcon } from '@app/common';
-import { useAppSelector } from '@app/common/store';
+import { useAppSelector, useAppDispatch, setTrack } from '@app/common/store';
 
 import { TrackProps } from './track.interface';
 import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
+  const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
+
   const [favorite, setFavorite] = useState(false);
 
   const { track: currentTrack } = useAppSelector(
     (store) => store.musicPlayerSlice,
   );
 
-  const onLike: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const { refetch } = useTrackQuery(track._id);
+
+  const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
     setFavorite((prev) => !prev);
+    queryClient.invalidateQueries({ queryKey: ['track', track._id] });
+  };
+
+  const onTrackSelect = () => {
+    if (currentTrack?._id !== track._id) {
+      refetch().then(({ data }) => {
+        if (data) {
+          dispatch(setTrack(data));
+        }
+      });
+    }
   };
 
   return (
@@ -29,6 +47,10 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
         className,
       )}
       aria-label="Select track"
+      aria-hidden
+      role="button"
+      tabIndex={0}
+      onClick={onTrackSelect}
       {...props}
     >
       <div className={styles.track}>
