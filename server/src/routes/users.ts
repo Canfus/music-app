@@ -34,13 +34,6 @@ usersRouter.get('/users/:userId', async (req, res) => {
       },
     });
 
-    // const error: Exception<object> = {
-    //   status: 400,
-    //   message: {
-    //     nonFieldErrors: ['invalid userId'],
-    //   },
-    // };
-
     return res.status(error.status).json(error);
   }
 
@@ -51,14 +44,6 @@ usersRouter.get('/users/:userId', async (req, res) => {
         nonFieldErrors: ['userId is required'],
       },
     });
-
-    // const error: Error = {
-    //   status: 400,
-    //   message: {
-    //     customError: 'userId is required',
-    //     fieldErrors: [],
-    //   },
-    // };
 
     return res.status(error.status).json(error);
   }
@@ -78,14 +63,6 @@ usersRouter.get('/users/:userId', async (req, res) => {
           nonFieldErrors: ['user not found'],
         },
       });
-
-      // const error: Error = {
-      //   status: 404,
-      //   message: {
-      //     customError: 'user not found',
-      //     fieldErrors: [],
-      //   },
-      // };
 
       return res.status(error.status).json(error);
     }
