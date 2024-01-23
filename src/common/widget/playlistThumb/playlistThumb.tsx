@@ -5,6 +5,8 @@ import {
   useAppDispatch,
   setCurrentPlaylist,
 } from '@app/common/store';
+import { usePlaylistQuery } from '@app/api';
+import { Loader } from '@app/common';
 
 import type { PlaylistThumbProps } from './playlistThumb.interface';
 import styles from './playlistThumb.module.css';
@@ -16,7 +18,21 @@ export const PlaylistThumb = ({
 }: PlaylistThumbProps) => {
   const dispatch = useAppDispatch();
 
-  const { currentPlaylist } = useAppSelector((store) => store.albumSlice);
+  const currentPlaylist = useAppSelector(
+    (store) => store.albumSlice.currentPlaylist,
+  );
+
+  const { refetch, isFetching: isLoading } = usePlaylistQuery(playlist._id);
+
+  const onPlaylistSelect = () => {
+    if (currentPlaylist?._id !== playlist._id) {
+      refetch().then(({ data }) => {
+        if (data) {
+          dispatch(setCurrentPlaylist(data));
+        }
+      });
+    }
+  };
 
   return (
     <div
@@ -24,16 +40,22 @@ export const PlaylistThumb = ({
       className={classNames(
         styles.playlist__wrapper,
         {
-          [styles['playlist--selected']]: currentPlaylist?.id === playlist.id,
+          [styles['playlist--selected']]: currentPlaylist?._id === playlist._id,
+          [styles['playlist--loading']]: isLoading,
         },
         className,
       )}
-      onClick={() => dispatch(setCurrentPlaylist(playlist))}
+      onClick={onPlaylistSelect}
       role="button"
       tabIndex={0}
       aria-hidden
       aria-label={`Select playlist ${playlist.title}`}
     >
+      {isLoading && (
+        <div className={styles.playlist__loader}>
+          <Loader />
+        </div>
+      )}
       <img
         src={playlist.photo}
         alt={playlist.photo}
@@ -41,9 +63,8 @@ export const PlaylistThumb = ({
         draggable={false}
       />
       <div className={styles.playlist__description}>
-        {/* TODO: fix to real author name */}
         <p className={styles.description__author}>{playlist.title}</p>
-        <p className={styles.description__name}>Worldspawn</p>
+        <p className={styles.description__name}>{playlist.author}</p>
       </div>
     </div>
   );

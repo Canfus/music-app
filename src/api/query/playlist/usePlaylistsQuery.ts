@@ -10,7 +10,7 @@ export const usePlaylistsQuery = (
   queryOptions?: UseSuspenseQueryOptions<Playlist[], AxiosError>,
 ) => {
   const queryInfo = useSuspenseQuery<Playlist[], AxiosError>({
-    queryKey: ['tracklist'],
+    queryKey: ['playlists'],
     queryFn: async () => {
       const { data } = await axiosInstance.get<Playlist[]>('/playlists');
       return data;

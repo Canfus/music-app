@@ -1,5 +1,7 @@
+import { Playlist } from '@app/api';
+
 export interface User {
-  id: number;
+  _id: string;
   username: string;
-  playlist: any[]; // TODO: fix this to real type
+  playlist: Playlist[];
 }

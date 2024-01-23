@@ -1,22 +1,72 @@
 import classNames from 'classnames';
-import { FC, useState, MouseEventHandler } from 'react';
+import { FC, useMemo } from 'react';
 
-import { IconButton, LikeIcon, PlayIcon } from '@app/common';
-import { useAppSelector } from '@app/common/store';
+import {
+  useTrackQuery,
+  useLikeTrackMutation,
+  useDislikeTrackMutation,
+} from '@app/api';
+import {
+  IconButton,
+  LikeIcon,
+  PlayIcon,
+  Loader,
+  useAuth,
+  setUser,
+} from '@app/common';
+import { useAppSelector, useAppDispatch, setTrack } from '@app/common/store';
 
 import { TrackProps } from './track.interface';
 import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
-  const [favorite, setFavorite] = useState(false);
+  const dispatch = useAppDispatch();
+  const { user } = useAuth();
+
+  const isFavorite = useMemo<boolean>(() => {
+    if (!user) {
+      return false;
+    }
+
+    return user.playlist[0].music_list.some((trackId) => trackId === track._id);
+  }, [track._id, user]);
 
   const { track: currentTrack } = useAppSelector(
     (store) => store.musicPlayerSlice,
   );
 
-  const onLike: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const { refetch, isFetching: isLoading } = useTrackQuery(track._id);
+
+  const { mutate: like } = useLikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+  const { mutate: dislike } = useDislikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+
+  const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-    setFavorite((prev) => !prev);
+    if (user) {
+      if (!isFavorite) {
+        like({ trackId: track._id, userId: user._id });
+        return;
+      }
+      dislike({ trackId: track._id, userId: user._id });
+    }
+  };
+
+  const onTrackSelect = () => {
+    if (currentTrack?._id !== track._id) {
+      refetch().then(({ data }) => {
+        if (data) {
+          dispatch(setTrack(data));
+        }
+      });
+    }
   };
 
   return (
@@ -24,15 +74,27 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       className={classNames(
         styles.track__wrapper,
         {
-          [styles['track--selected']]: currentTrack?.id === track.id,
+          [styles['track--selected']]: currentTrack?._id === track._id,
         },
         className,
       )}
+      aria-label="Select track"
+      aria-hidden
+      role="button"
+      tabIndex={0}
+      onClick={onTrackSelect}
       {...props}
     >
       <div className={styles.track}>
         <div className={styles.image__wrapper}>
-          <IconButton icon={<PlayIcon />} className={styles.track__play} />
+          {isLoading && (
+            <div className={styles.track__loader}>
+              <Loader />
+            </div>
+          )}
+          {!isLoading && (
+            <IconButton icon={<PlayIcon />} className={styles.track__play} />
+          )}
           <img
             className={styles.track__image}
             src={track.photo}
@@ -47,7 +109,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       <IconButton
         onClick={onLike}
         style={
-          favorite
+          isFavorite
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color' }
         }

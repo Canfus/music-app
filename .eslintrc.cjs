@@ -1,7 +1,12 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
-  extends: ['airbnb', 'airbnb-typescript', 'airbnb/hooks', 'plugin:storybook/recommended'],
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'airbnb/hooks',
+    'plugin:storybook/recommended',
+  ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,6 +30,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'object-curly-newline': 'off',
     'react/button-has-type': 'off',
-    'react/function-component-definition': 'off'
-  }
-}
+    'react/function-component-definition': 'off',
+    'no-underscore-dangle': 'off',
+  },
+};

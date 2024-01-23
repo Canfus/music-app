@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useMemo } from 'react';
 import classNames from 'classnames';
 
 import {
@@ -6,7 +6,11 @@ import {
   IconButton,
   LikeIcon,
   copyToClipboard,
+  setUser,
+  useAppDispatch,
+  useAuth,
 } from '@app/common';
+import { useDislikeTrackMutation, useLikeTrackMutation } from '@app/api';
 
 import { TrackPreviewProps } from './trackPreview.interface';
 import styles from './trackPreview.module.css';
@@ -16,10 +20,37 @@ export const TrackPreview: FC<TrackPreviewProps> = ({
   className,
   ...props
 }) => {
-  const [favorite, setFavorite] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { user } = useAuth();
 
-  const onLike = () => {
-    setFavorite((prev) => !prev);
+  const isFavorite = useMemo<boolean>(() => {
+    if (!user || !track) {
+      return false;
+    }
+
+    return user.playlist[0].music_list.some((trackId) => trackId === track._id);
+  }, [track, user]);
+
+  const { mutate: like } = useLikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+  const { mutate: dislike } = useDislikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+
+  const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+    if (user) {
+      if (!isFavorite) {
+        like({ trackId: track._id, userId: user._id });
+        return;
+      }
+      dislike({ trackId: track._id, userId: user._id });
+    }
   };
 
   return (
@@ -46,7 +77,7 @@ export const TrackPreview: FC<TrackPreviewProps> = ({
       <IconButton
         onClick={onLike}
         style={
-          favorite
+          isFavorite
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color)' }
         }
