@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useTrackQuery } from '@app/api';
-import { IconButton, LikeIcon, PlayIcon } from '@app/common';
+import { IconButton, LikeIcon, PlayIcon, Loader } from '@app/common';
 import { useAppSelector, useAppDispatch, setTrack } from '@app/common/store';
 
 import { TrackProps } from './track.interface';
@@ -19,7 +19,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
     (store) => store.musicPlayerSlice,
   );
 
-  const { refetch } = useTrackQuery(track._id);
+  const { refetch, isFetching: isLoading } = useTrackQuery(track._id);
 
   const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
@@ -55,7 +55,14 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
     >
       <div className={styles.track}>
         <div className={styles.image__wrapper}>
-          <IconButton icon={<PlayIcon />} className={styles.track__play} />
+          {isLoading && (
+            <div className={styles.track__loader}>
+              <Loader />
+            </div>
+          )}
+          {!isLoading && (
+            <IconButton icon={<PlayIcon />} className={styles.track__play} />
+          )}
           <img
             className={styles.track__image}
             src={track.photo}
