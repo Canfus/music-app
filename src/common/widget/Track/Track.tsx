@@ -1,9 +1,19 @@
 import classNames from 'classnames';
-import { FC, useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
 
-import { useTrackQuery } from '@app/api';
-import { IconButton, LikeIcon, PlayIcon, Loader } from '@app/common';
+import {
+  useTrackQuery,
+  useLikeTrackMutation,
+  useDislikeTrackMutation,
+} from '@app/api';
+import {
+  IconButton,
+  LikeIcon,
+  PlayIcon,
+  Loader,
+  useAuth,
+  setUser,
+} from '@app/common';
 import { useAppSelector, useAppDispatch, setTrack } from '@app/common/store';
 
 import { TrackProps } from './track.interface';
@@ -11,9 +21,15 @@ import styles from './track.module.css';
 
 export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
   const dispatch = useAppDispatch();
-  const queryClient = useQueryClient();
+  const { user } = useAuth();
 
-  const [favorite, setFavorite] = useState(false);
+  const isFavorite = useMemo<boolean>(() => {
+    if (!user) {
+      return false;
+    }
+
+    return user.playlist[0].music_list.some((trackId) => trackId === track._id);
+  }, [track._id, user]);
 
   const { track: currentTrack } = useAppSelector(
     (store) => store.musicPlayerSlice,
@@ -21,10 +37,26 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
 
   const { refetch, isFetching: isLoading } = useTrackQuery(track._id);
 
+  const { mutate: like } = useLikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+  const { mutate: dislike } = useDislikeTrackMutation({
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+    },
+  });
+
   const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-    setFavorite((prev) => !prev);
-    queryClient.invalidateQueries({ queryKey: ['track', track._id] });
+    if (user) {
+      if (!isFavorite) {
+        like({ trackId: track._id, userId: user._id });
+        return;
+      }
+      dislike({ trackId: track._id, userId: user._id });
+    }
   };
 
   const onTrackSelect = () => {
@@ -77,7 +109,7 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
       <IconButton
         onClick={onLike}
         style={
-          favorite
+          isFavorite
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color' }
         }

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import { mongoClient, getDatabase, getObjectId } from '../mongo';
-import { TRACKLIST_COLLECTION } from '../utils';
-import { Exception } from '../api';
+import { TRACKLIST_COLLECTION, USERS_COLLECTION } from '../utils';
+import { Exception, FavoriteCredentials } from '../api';
 
 export const tracklistRouter = Router();
 
@@ -79,6 +79,84 @@ tracklistRouter.get('/tracklist/:trackId', async (req, res) => {
     }
 
     return res.json(track);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await mongoClient.close();
+  }
+});
+
+tracklistRouter.post('/like', async (req, res) => {
+  const { userId, trackId } = req.body as FavoriteCredentials;
+
+  if (!userId || !trackId) {
+    const error = new Exception({
+      status: 400,
+      details: {
+        nonFieldErrors: ['data is required'],
+      },
+    });
+
+    return res.status(error.status).json(error);
+  }
+
+  try {
+    await mongoClient.connect();
+
+    const db = getDatabase();
+    const collection = db.collection(USERS_COLLECTION);
+
+    await collection.updateOne(
+      {
+        _id: getObjectId(userId),
+      },
+      {
+        $addToSet: { 'playlist.0.music_list': trackId },
+      },
+    );
+
+    const user = await collection.findOne({ _id: getObjectId(userId) });
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await mongoClient.close();
+  }
+});
+
+tracklistRouter.post('/dislike', async (req, res) => {
+  const { userId, trackId } = req.body as FavoriteCredentials;
+
+  if (!userId || !trackId) {
+    const error = new Exception({
+      status: 400,
+      details: {
+        nonFieldErrors: ['data is required'],
+      },
+    });
+
+    return res.status(error.status).json(error);
+  }
+
+  try {
+    await mongoClient.connect();
+
+    const db = getDatabase();
+    const collection = db.collection(USERS_COLLECTION);
+
+    await collection.updateOne(
+      {
+        _id: getObjectId(userId),
+      },
+      {
+        $pull: { 'playlist.0.music_list': trackId },
+      },
+    );
+
+    const user = await collection.findOne({ _id: getObjectId(userId) });
+
+    return res.json(user);
   } catch (error) {
     console.log(error);
   } finally {
