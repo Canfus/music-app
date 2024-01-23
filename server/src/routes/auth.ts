@@ -114,7 +114,7 @@ authRouter.post('/register', async (req, res) => {
       const error = new Exception<RegisterCredentials>({
         status: 400,
         details: {
-          nonFieldErrors: ['user already exists'],
+          fieldErrors: [{ username: 'user already exists' }],
         },
       });
 

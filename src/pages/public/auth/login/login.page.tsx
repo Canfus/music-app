@@ -37,13 +37,15 @@ export const Login = () => {
     onError: (error) => {
       switch (error.response?.status) {
         case 404:
-          form.setError('username', {
-            message: "Username doesn't exist",
+          error.response.data.details.fieldErrors?.forEach((field) => {
+            const [key, value] = Object.entries(field)[0];
+            form.setError(key as keyof Schema, { message: value });
           });
           break;
         case 400:
-          form.setError('password', {
-            message: 'Invalid login or password',
+          error.response.data.details.fieldErrors?.forEach((field) => {
+            const [key, value] = Object.entries(field)[0];
+            form.setError(key as keyof Schema, { message: value });
           });
           break;
         default:

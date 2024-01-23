@@ -40,10 +40,9 @@ export const Register = () => {
     onError: (error) => {
       switch (error.response?.status) {
         case 400:
-          const errorData = error.response?.data as Partial<Schema>;
-          const keys = Object.keys(errorData) as (keyof Schema)[];
-          keys.forEach((key) => {
-            form.setError(key, { message: errorData[key] });
+          error.response.data.details.fieldErrors?.forEach((field) => {
+            const [key, value] = Object.entries(field)[0];
+            form.setError(key as keyof Schema, { message: value });
           });
           break;
         default:
