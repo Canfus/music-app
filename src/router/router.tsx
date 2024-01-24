@@ -8,6 +8,7 @@ import {
   Login,
   Register,
   NotFound,
+  ProfilePage,
 } from '@app/pages';
 import { ProtectedRoute } from '@app/common';
 
@@ -15,9 +16,10 @@ import { routenames } from './routenames';
 
 export const Router: FC = () => (
   <Routes>
-    <Route element={<ProtectedRoute />}>
-      <Route path={routenames.HOME} element={<Layout />}>
-        <Route index element={<MainPage />} />
+    <Route path={routenames.HOME} element={<Layout />}>
+      <Route index element={<MainPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path={routenames.PROFILE} element={<ProfilePage />} />
       </Route>
     </Route>
     <Route path={routenames.AUTH} element={<AuthLayout />}>

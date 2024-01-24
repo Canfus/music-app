@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom';
 
-import { MediaPlayer } from '@app/common';
+import { Header, MediaPlayer } from '@app/common';
 
 import styles from './layout.module.css';
 
 export const Layout = () => (
   <div className={styles.layout__wrapper}>
+    <Header />
     <div className={styles.layout__outlet}>
       <Outlet />
     </div>

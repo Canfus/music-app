@@ -4,6 +4,8 @@
   border: none;
   border-radius: 5px;
 
+  white-space: nowrap;
+
   transition: all var(--button-transition-delay);
 }
 

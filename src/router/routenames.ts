@@ -4,4 +4,5 @@ export const routenames = {
   LOGIN: 'login',
   REGISTER: 'register',
   NOT_FOUND: '*',
+  PROFILE: '/profile',
 };
