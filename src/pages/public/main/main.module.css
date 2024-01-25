@@ -21,7 +21,7 @@
 }
 
 .page__playlists {
-  width: 100%;
+  width: 50%;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
