@@ -18,7 +18,11 @@ export const ProfilePage = () => {
         <ProfileHeader user={user} />
         <div className={styles.page__playlists}>
           {user.playlist.map((playlist) => (
-            <PlaylistThumb key={playlist._id} playlist={playlist} />
+            <PlaylistThumb
+              key={playlist._id}
+              playlist={playlist}
+              className={styles.page__playlist}
+            />
           ))}
         </div>
       </div>
