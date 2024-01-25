@@ -16,7 +16,7 @@ export const ProfileHeader = ({
       className={styles.info__photo}
     />
     <div className={styles.info__user}>
-      <h2 className={styles.user__name}>Worldspawn</h2>
+      <h2 className={styles.user__name}>{user.username}</h2>
       <p className={styles.user__sex}>he/him, 23 years old</p>
       <section className={styles.separator} />
       <p className={styles.user__status}>What about you? Lorem ipsum</p>
