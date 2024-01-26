@@ -23,10 +23,10 @@ app.use(authRouter);
 
 app.all('/', (_, res) => {
   res.json({
-    message: 'server is working',
+    message: 'Server is working',
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server waas start with port ${PORT}`);
+  console.log(`Server started on PORT: ${PORT}`);
 });
