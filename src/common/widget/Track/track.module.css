@@ -66,6 +66,10 @@
   pointer-events: none;
 }
 
+.track__play--pending {
+  animation: pending 1000ms linear infinite;
+}
+
 .track__wrapper:hover .track__play {
   display: block;
 }
@@ -96,4 +100,16 @@
 .info__author {
   font-size: 14px;
   font-weight: 400;
+}
+
+@keyframes pending {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }

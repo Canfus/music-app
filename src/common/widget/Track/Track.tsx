@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
@@ -13,6 +14,7 @@ import {
   Loader,
   useAuth,
   setUser,
+  updateFavoritePlaylist,
 } from '@app/common';
 import { useAppSelector, useAppDispatch, setTrack } from '@app/common/store';
 
@@ -37,20 +39,22 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
 
   const { refetch, isFetching: isLoading } = useTrackQuery(track._id);
 
-  const { mutate: like } = useLikeTrackMutation({
+  const { mutate: like, isPending: likeIsPending } = useLikeTrackMutation({
     onSuccess: (data) => {
       dispatch(setUser(data));
     },
   });
-  const { mutate: dislike } = useDislikeTrackMutation({
-    onSuccess: (data) => {
-      dispatch(setUser(data));
-    },
-  });
+  const { mutate: dislike, isPending: dislikeIsPending } =
+    useDislikeTrackMutation({
+      onSuccess: (data) => {
+        dispatch(setUser(data));
+      },
+    });
 
   const onLike: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
     if (user) {
+      dispatch(updateFavoritePlaylist(track._id));
       if (!isFavorite) {
         like({ trackId: track._id, userId: user._id });
         return;
@@ -113,6 +117,9 @@ export const Track: FC<TrackProps> = ({ track, className, ...props }) => {
             ? { color: 'var(--primary-color)' }
             : { color: 'var(--gray-color' }
         }
+        className={classNames({
+          [styles['track__play--pending']]: likeIsPending || dislikeIsPending,
+        })}
         icon={<LikeIcon />}
       />
     </div>

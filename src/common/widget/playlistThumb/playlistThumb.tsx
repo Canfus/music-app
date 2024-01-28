@@ -18,8 +18,6 @@ export const PlaylistThumb = ({
 }: PlaylistThumbProps) => {
   const dispatch = useAppDispatch();
 
-  console.log(playlist);
-
   const currentPlaylist = useAppSelector(
     (store) => store.albumSlice.currentPlaylist,
   );

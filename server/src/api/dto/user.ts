@@ -32,6 +32,7 @@ export class User implements UserDto {
   playlist = [
     {
       _id: new ObjectId(),
+      key: 'favorite',
       title: 'Избранное',
       photo:
         'https://images.unsplash.com/photo-1644664477908-f8c4b1d215c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
