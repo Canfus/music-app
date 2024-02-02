@@ -1,10 +1,4 @@
-import type { Playlist } from '@app/api';
-
-interface User {
-  id: number | null;
-  username: string | null;
-  playlist: Playlist[];
-}
+import type { User } from '@app/api';
 
 export interface UserSlice {
   user: User | null;

@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 export interface LoginCredentials {
   username: string;
   password: string;
@@ -15,10 +17,11 @@ export interface UserDto {
   email: string;
   password: string;
   playlist: {
-    id: number;
+    _id: ObjectId;
     title: string;
     photo: string;
     music_list: string[];
+    author: string;
   }[];
 }
 
@@ -28,11 +31,12 @@ export class User implements UserDto {
   password = '';
   playlist = [
     {
-      id: 1,
+      _id: new ObjectId(),
       title: 'Избранное',
       photo:
         'https://images.unsplash.com/photo-1644664477908-f8c4b1d215c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
       music_list: [],
+      author: this.username,
     },
   ];
 

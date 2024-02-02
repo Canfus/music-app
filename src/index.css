@@ -37,7 +37,10 @@ body {
 
   --link-font-color: #434343;
 
+  --label-font-color: #626262;
+
   --gray-color: #232323;
+  --light-gray-color: #363636;
 
   --slider-height: 10px;
   --slider-bg-color: #363636;

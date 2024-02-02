@@ -1,0 +1,1 @@
+export { OptionsIcon } from './options';

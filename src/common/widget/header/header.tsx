@@ -17,7 +17,7 @@ export const Header = ({
     <header {...props} className={classNames(styles.header, className)}>
       <Link to="/">{isMobile ? <LogoMobile /> : <Logo />}</Link>
       {!isAuthPage && (
-        <Link to="/auth">
+        <Link to="/profile">
           <ProfileIcon />
         </Link>
       )}

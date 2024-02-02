@@ -10,8 +10,6 @@ import {
   AuthProvider,
 } from '@app/common';
 
-import './App.css';
-
 export const App = () => {
   const { reset } = useQueryErrorResetBoundary();
 
