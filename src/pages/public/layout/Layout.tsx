@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { Header, MediaPlayer } from '@app/common';
+import { Header, MediaPlayer, Notification } from '@app/common';
 
 import styles from './layout.module.css';
 
@@ -11,5 +11,6 @@ export const Layout = () => (
       <Outlet />
     </div>
     <MediaPlayer className={styles.media__player} />
+    <Notification />
   </div>
 );
