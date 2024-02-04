@@ -78,33 +78,10 @@ export const Notification = forwardRef<HTMLDivElement, NotificationProps>(
                   styles['content__wrapper--actions'],
                 )}
               >
-                <p className={styles.content__title}>{content}</p>
-                <div className={styles.content__action}>
-                  <button
-                    type="button"
-                    aria-label="approve action"
-                    className={styles.action__button}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      if (onSuccess) {
-                        onSuccess();
-                      }
-                    }}
-                  >
-                    <SuccessIcon />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="reject action"
-                    className={styles.action__button}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      closeNotification();
-                    }}
-                  >
-                    <RejectIcon />
-                  </button>
-                </div>
+                <p className={styles.content__title}>
+                  {title || 'Are you sure?'}
+                </p>
+                {content}
               </div>
             </>
           );
@@ -128,7 +105,7 @@ export const Notification = forwardRef<HTMLDivElement, NotificationProps>(
             </>
           );
       }
-    }, [closeNotification, content, onSuccess, title, type]);
+    }, [content, title, type]);
 
     if (!isOpen) {
       return null;

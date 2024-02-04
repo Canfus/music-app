@@ -11,7 +11,6 @@ import {
   FormControl,
   FormMessage,
   useAuth,
-  Notification,
   useNotification,
 } from '@app/common';
 import { useLoginMutation } from '@app/api';
@@ -122,7 +121,6 @@ export const Login = () => {
           </Button>
         </form>
       </Form>
-      <Notification />
     </div>
   );
 };
