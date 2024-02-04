@@ -11,6 +11,7 @@ import {
   FormControl,
   FormMessage,
   useAuth,
+  useNotification,
 } from '@app/common';
 import { useLoginMutation } from '@app/api';
 
@@ -29,12 +30,22 @@ export const Login = () => {
     },
   });
 
+  const { callNotification } = useNotification();
+
   const { mutate } = useLoginMutation({
     onSuccess: (data) => {
       updateUser(data);
+      callNotification({
+        type: 'success',
+        content: 'Login successful',
+      });
       navigate('/');
     },
     onError: (error) => {
+      callNotification({
+        type: 'error',
+        content: 'Login failed',
+      });
       switch (error.response?.status) {
         case 404:
           error.response.data.details.fieldErrors?.forEach((field) => {

@@ -1,0 +1,37 @@
+.content__action {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.action__button {
+  width: 24px;
+  height: 24px;
+
+  background-color: transparent;
+
+  border: none;
+
+  cursor: pointer;
+
+  transition: transform 150ms;
+}
+
+.action__button:active {
+  transform: scale(0.9);
+}
+
+@media screen and (min-width: 768px) {
+  .content__wrapper--actions {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .content__action {
+    gap: 16px;
+  }
+}
+

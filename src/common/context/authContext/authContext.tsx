@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const contextValue = useMemo<AuthContextProps>(
     () => ({
       // have TS error here, fix it later, don't wanna fix it now
-      // @ts-expect-error
+      // @ts-ignore
       user,
       clearUser,
       updateUser,
