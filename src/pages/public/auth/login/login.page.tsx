@@ -49,14 +49,20 @@ export const Login = () => {
       switch (error.response?.status) {
         case 404:
           error.response.data.details.fieldErrors?.forEach((field) => {
-            const [key, value] = Object.entries(field)[0];
-            form.setError(key as keyof Schema, { message: value });
+            const [key, value] = Object.entries(field)[0] as [
+              key: keyof Schema,
+              value: string,
+            ];
+            form.setError(key, { message: value });
           });
           break;
         case 400:
           error.response.data.details.fieldErrors?.forEach((field) => {
-            const [key, value] = Object.entries(field)[0];
-            form.setError(key as keyof Schema, { message: value });
+            const [key, value] = Object.entries(field)[0] as [
+              key: keyof Schema,
+              value: string,
+            ];
+            form.setError(key, { message: value });
           });
           break;
         default:

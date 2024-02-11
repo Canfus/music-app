@@ -41,7 +41,10 @@ export const Register = () => {
       switch (error.response?.status) {
         case 400:
           error.response.data.details.fieldErrors?.forEach((field) => {
-            const [key, value] = Object.entries(field)[0];
+            const [key, value] = Object.entries(field)[0] as [
+              key: keyof Schema,
+              value: string,
+            ];
             form.setError(key as keyof Schema, { message: value });
           });
           break;
