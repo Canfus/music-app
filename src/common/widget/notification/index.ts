@@ -1,2 +1,2 @@
-export { Notification } from './Notification';
-export { NotificationAction } from './notificationAction';
+export * from './notification';
+export * from './root';

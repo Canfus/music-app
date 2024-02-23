@@ -1,39 +1,37 @@
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 
-import type { NotificationContentProps } from '@app/common/store';
-import { useAppSelector, useAppDispatch, close, open } from '@app/common/store';
+import { useAppDispatch, append, remove, getId } from '@app/common';
+import type { Notification, NotificationId } from './useNotification.interface';
 
 import { TIMER_AUTO_CLOSE } from './useNotification.constants';
 
 export const useNotification = () => {
   const dispatch = useAppDispatch();
 
-  const { isOpen } = useAppSelector(
-    (store) => store.notificationSlice.notification,
-  );
-
-  const timerId = useRef<NodeJS.Timeout | null>(null);
-
   const callNotification = useCallback(
-    ({ autoClose = TIMER_AUTO_CLOSE, ...props }: NotificationContentProps) => {
-      if (!isOpen) {
-        dispatch(open(props));
-      }
+    (props: Omit<Notification, 'id'>) => {
+      const uniqueId = getId();
 
-      if (timerId.current) {
-        clearTimeout(timerId.current);
-      }
+      dispatch(
+        append({
+          id: uniqueId,
+          ...props,
+        }),
+      );
 
-      timerId.current = setTimeout(() => {
-        dispatch(close());
-      }, autoClose);
+      setTimeout(() => {
+        dispatch(remove(uniqueId));
+      }, TIMER_AUTO_CLOSE);
     },
-    [dispatch, isOpen],
+    [dispatch],
   );
 
-  const closeNotification = useCallback(() => {
-    dispatch(close());
-  }, [dispatch]);
+  const closeNotification = useCallback(
+    (id: NotificationId) => {
+      dispatch(remove(id));
+    },
+    [dispatch],
+  );
 
   return { callNotification, closeNotification };
 };

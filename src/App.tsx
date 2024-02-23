@@ -8,7 +8,7 @@ import {
   ErrorBoundaryFallback,
   SuspenseFallback,
   AuthProvider,
-  Notification,
+  NotificationRoot,
 } from '@app/common';
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
         <TooltipProvider>
           <AuthProvider>
             <Router />
-            <Notification />
+            <NotificationRoot />
           </AuthProvider>
         </TooltipProvider>
       </ErrorBoundary>

@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.notification:not(:last-child) {
+  margin-bottom: 24px;
+}
+
 .icon__wrapper {
   display: flex;
   justify-content: center;

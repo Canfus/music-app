@@ -2,36 +2,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type {
-  NotificationSlice,
-  NotificationContentProps,
+  SliceProps,
+  Notification,
+  NotificationId,
 } from './notificationSlice.interface';
 
-const initialState: NotificationSlice = {
-  notification: {
-    isOpen: false,
-    content: null,
-  },
+const initialState: SliceProps = {
+  notifications: [],
 };
 
 export const notificationSlice = createSlice({
   name: 'notificationSlice',
   initialState,
   reducers: {
-    close: (state) => {
-      state.notification.isOpen = false;
-      state.notification.content = null;
-      state.notification.title = undefined;
-      state.notification.type = undefined;
+    append: (state, action: PayloadAction<Notification>) => {
+      state.notifications.push(action.payload);
     },
-    open: (state, action: PayloadAction<NotificationContentProps>) => {
-      const { content, title, type } = action.payload;
-
-      state.notification.isOpen = true;
-      state.notification.type = type;
-      state.notification.content = content;
-      state.notification.title = title;
+    remove: (state, action: PayloadAction<NotificationId>) => {
+      state.notifications = state.notifications.filter(
+        (notification) => notification.id !== action.payload,
+      );
     },
   },
 });
 
-export const { close, open } = notificationSlice.actions;
+export const { remove, append } = notificationSlice.actions;
