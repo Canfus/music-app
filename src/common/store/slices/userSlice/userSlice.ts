@@ -19,7 +19,26 @@ export const userSlice = createSlice({
     resetUser: (state) => {
       state.user = null;
     },
+    updateFavoritePlaylist: ({ user }, action: PayloadAction<string>) => {
+      const trackId = action.payload;
+
+      if (user) {
+        const favoritePlaylist = user.playlist.find(
+          (item) => item.key === 'favorite',
+        );
+
+        if (favoritePlaylist) {
+          if (favoritePlaylist.music_list.includes(trackId)) {
+            favoritePlaylist.music_list = favoritePlaylist.music_list.filter(
+              (musicId) => musicId !== trackId,
+            );
+          } else {
+            favoritePlaylist.music_list.push(trackId);
+          }
+        }
+      }
+    },
   },
 });
 
-export const { setUser, resetUser } = userSlice.actions;
+export const { setUser, resetUser, updateFavoritePlaylist } = userSlice.actions;

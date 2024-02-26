@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { Playlist } from '@server/api/dto/playlist';
 
 export interface LoginCredentials {
   username: string;
@@ -29,16 +30,7 @@ export class User implements UserDto {
   username = '';
   email = '';
   password = '';
-  playlist = [
-    {
-      _id: new ObjectId(),
-      title: 'Избранное',
-      photo:
-        'https://images.unsplash.com/photo-1644664477908-f8c4b1d215c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
-      music_list: [],
-      author: this.username,
-    },
-  ];
+  playlist = [new Playlist({ author: this.username })];
 
   constructor({
     username,
